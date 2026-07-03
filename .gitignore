@@ -60,3 +60,5 @@ fp-info-cache
 *.log
 *.tmp
 
+hardware/Kicad/ignition-system/.history/
+hardware/Kicad/ignition-system/ignition-system-backups/
