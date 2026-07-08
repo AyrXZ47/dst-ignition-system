@@ -7478,7 +7478,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
 			(at 45.72 162.56 0)
 			(hide yes)
 			(show_name no)
@@ -7898,7 +7898,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7bebef80-b338-4d46-924b-041101a8726c")
-		(property "Reference" "Rojo(Armado/Peligro)1"
+		(property "Reference" "RLED1"
 			(at 187.6425 154.94 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7971,7 +7971,7 @@
 		(instances
 			(project "ignition-system"
 				(path "/e17dc731-fbd5-49fb-b534-5ba28a19fa2e"
-					(reference "Rojo(Armado/Peligro)1")
+					(reference "RLED1")
 					(unit 1)
 				)
 			)
@@ -9206,7 +9206,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d1ef7d0e-0ff2-4472-915b-be8172f27a19")
-		(property "Reference" "Amarillo(Modo/Rol)1"
+		(property "Reference" "YLED1"
 			(at 187.6425 142.24 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9279,7 +9279,7 @@
 		(instances
 			(project "ignition-system"
 				(path "/e17dc731-fbd5-49fb-b534-5ba28a19fa2e"
-					(reference "Amarillo(Modo/Rol)1")
+					(reference "YLED1")
 					(unit 1)
 				)
 			)
@@ -9580,7 +9580,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e3fb43eb-c770-4e2e-bd61-d2d1f2fc3314")
-		(property "Reference" "Azul(Sistema/Link)1"
+		(property "Reference" "BLED1"
 			(at 187.6425 129.54 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9653,7 +9653,7 @@
 		(instances
 			(project "ignition-system"
 				(path "/e17dc731-fbd5-49fb-b534-5ba28a19fa2e"
-					(reference "Azul(Sistema/Link)1")
+					(reference "BLED1")
 					(unit 1)
 				)
 			)
