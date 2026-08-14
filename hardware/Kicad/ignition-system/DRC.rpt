@@ -1,0 +1,386 @@
+** Drc report for ignition-system.kicad_pcb **
+** Created on 2026-08-13T23:31:59 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 34 DRC violations **
+[drill_out_of_range]: Hole size out of range (board setup constraints min hole 0.3000 mm; actual 0.2000 mm)
+    Rule: board setup constraints; error
+    @(190.1650 mm, 83.1750 mm): PTH pad 9 [GND] of ModuloDeCarga1
+[drill_out_of_range]: Hole size out of range (board setup constraints min hole 0.3000 mm; actual 0.2000 mm)
+    Rule: board setup constraints; error
+    @(191.3650 mm, 83.1750 mm): PTH pad 9 [GND] of ModuloDeCarga1
+[drill_out_of_range]: Hole size out of range (board setup constraints min hole 0.3000 mm; actual 0.2000 mm)
+    Rule: board setup constraints; error
+    @(192.5650 mm, 83.1750 mm): PTH pad 9 [GND] of ModuloDeCarga1
+[drill_out_of_range]: Hole size out of range (board setup constraints min hole 0.3000 mm; actual 0.2000 mm)
+    Rule: board setup constraints; error
+    @(190.1650 mm, 81.7750 mm): PTH pad 9 [GND] of ModuloDeCarga1
+[drill_out_of_range]: Hole size out of range (board setup constraints min hole 0.3000 mm; actual 0.2000 mm)
+    Rule: board setup constraints; error
+    @(191.3650 mm, 81.7750 mm): PTH pad 9 [GND] of ModuloDeCarga1
+[drill_out_of_range]: Hole size out of range (board setup constraints min hole 0.3000 mm; actual 0.2000 mm)
+    Rule: board setup constraints; error
+    @(192.5650 mm, 81.7750 mm): PTH pad 9 [GND] of ModuloDeCarga1
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(124.0000 mm, 117.5000 mm): Rectangle on F.Silkscreen
+    @(124.1200 mm, 117.5400 mm): Segment of Display1 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(124.0000 mm, 117.5000 mm): Rectangle on F.Silkscreen
+    @(124.1200 mm, 118.9200 mm): Segment of Display1 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(155.5000 mm, 108.5000 mm): Reference field of RaspberryPi_Pico1
+    @(122.9615 mm, 94.9300 mm): Segment of RaspberryPi_Pico1 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(128.8300 mm, 86.4500 mm): Reference field of C2
+    @(128.2350 mm, 86.7113 mm): Segment of C1 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(170.3850 mm, 127.2246 mm): Segment of R1 on F.Silkscreen
+    @(170.9500 mm, 126.9975 mm): Reference field of R2
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(170.3850 mm, 122.8146 mm): Segment of R6 on F.Silkscreen
+    @(170.9500 mm, 122.5875 mm): Reference field of R7
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(173.9000 mm, 122.5875 mm): Reference field of R8
+    @(173.3350 mm, 122.8146 mm): Segment of R7 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(173.3350 mm, 127.2246 mm): Segment of R2 on F.Silkscreen
+    @(173.9000 mm, 126.9975 mm): Reference field of R3
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(176.8500 mm, 126.9975 mm): Reference field of R4
+    @(176.2850 mm, 127.2246 mm): Segment of R3 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(179.2350 mm, 127.2246 mm): Segment of R4 on F.Silkscreen
+    @(179.8000 mm, 126.9975 mm): Reference field of R5
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(176.8500 mm, 122.5875 mm): Reference field of R9
+    @(176.2850 mm, 122.8146 mm): Segment of R8 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(179.2350 mm, 122.8146 mm): Segment of R9 on F.Silkscreen
+    @(179.8000 mm, 122.5875 mm): Reference field of R11
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(170.9500 mm, 122.5875 mm): Reference field of R7
+    @(169.6500 mm, 123.5000 mm): Pad 1 [ADC_Bateria] of R6 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(170.9500 mm, 126.9975 mm): Reference field of R2
+    @(169.6500 mm, 127.9100 mm): Pad 1 [Net-(BLED1-A)] of R1 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(170.9500 mm, 126.9975 mm): Reference field of R2
+    @(169.6500 mm, 126.0850 mm): Pad 2 [LED_LINK] of R1 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(170.9500 mm, 122.5875 mm): Reference field of R7
+    @(169.6500 mm, 121.6750 mm): Pad 2 [GND] of R6 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(173.9000 mm, 126.9975 mm): Reference field of R3
+    @(172.6000 mm, 127.9100 mm): Pad 1 [Net-(YLED1-A)] of R2 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(173.9000 mm, 126.9975 mm): Reference field of R3
+    @(172.6000 mm, 126.0850 mm): Pad 2 [LED_MODO] of R2 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(173.9000 mm, 122.5875 mm): Reference field of R8
+    @(172.6000 mm, 123.5000 mm): Pad 1 [Net-(AOD4184A1-G)] of R7 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(173.9000 mm, 122.5875 mm): Reference field of R8
+    @(172.6000 mm, 121.6750 mm): Pad 2 [GND] of R7 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(176.8500 mm, 126.9975 mm): Reference field of R4
+    @(175.5500 mm, 127.9100 mm): Pad 1 [Net-(RLED1-A)] of R3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(176.8500 mm, 126.9975 mm): Reference field of R4
+    @(175.5500 mm, 126.0850 mm): Pad 2 [LED_ARMADO] of R3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(179.8000 mm, 126.9975 mm): Reference field of R5
+    @(178.5000 mm, 126.0850 mm): Pad 2 [GND] of R4 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(179.8000 mm, 126.9975 mm): Reference field of R5
+    @(178.5000 mm, 127.9100 mm): Pad 1 [Net-(ModuloDeCarga1-PROG)] of R4 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(176.8500 mm, 122.5875 mm): Reference field of R9
+    @(175.5500 mm, 123.5000 mm): Pad 1 [STDBY] of R8 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(176.8500 mm, 122.5875 mm): Reference field of R9
+    @(175.5500 mm, 121.6750 mm): Pad 2 [Net-(STDBY1-K)] of R8 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(179.8000 mm, 122.5875 mm): Reference field of R11
+    @(178.5000 mm, 123.5000 mm): Pad 1 [CHRG] of R9 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(179.8000 mm, 122.5875 mm): Reference field of R11
+    @(178.5000 mm, 121.6750 mm): Pad 2 [Net-(CHRG1-K)] of R9 on F.Cu
+
+** Found 59 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(123.6750 mm, 92.7500 mm): Pad 39 [VSYS] of RaspberryPi_Pico1 on F.Cu
+    @(127.5000 mm, 87.4000 mm): Pad 1 [VSYS] of C1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(127.5000 mm, 87.4000 mm): Pad 1 [VSYS] of C1 on F.Cu
+    @(131.0000 mm, 76.0000 mm): PTH pad 1 [VSYS] of InBatt1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(181.4500 mm, 127.9100 mm): Pad 1 [VSYS] of R5 on F.Cu
+    @(193.9600 mm, 90.5000 mm): PTH pad 2 [VSYS] of SW2
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(193.2700 mm, 80.0000 mm): Pad 5 [VSYS] of ModuloDeCarga1 on F.Cu
+    @(131.0000 mm, 76.0000 mm): PTH pad 1 [VSYS] of InBatt1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(193.9600 mm, 90.5000 mm): PTH pad 2 [VSYS] of SW2
+    @(193.2700 mm, 80.0000 mm): Pad 5 [VSYS] of ModuloDeCarga1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(125.5000 mm, 126.5400 mm): PTH pad 4 [GND] of Display1
+    @(126.2150 mm, 112.1300 mm): Pad 3 [GND] of RaspberryPi_Pico1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.2150 mm, 93.5500 mm): PTH pad 38 [GND] of RaspberryPi_Pico1
+    @(126.2150 mm, 111.3300 mm): PTH pad 3 [GND] of RaspberryPi_Pico1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(127.5000 mm, 85.5000 mm): Pad 2 [GND] of C1 on F.Cu
+    @(126.2150 mm, 92.7500 mm): Pad 38 [GND] of RaspberryPi_Pico1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(130.5100 mm, 85.5000 mm): Pad 2 [GND] of C2 on F.Cu
+    @(127.5000 mm, 85.5000 mm): Pad 2 [GND] of C1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(131.0000 mm, 78.0000 mm): PTH pad 2 [GND] of InBatt1
+    @(130.5100 mm, 85.5000 mm): Pad 2 [GND] of C2 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(138.9150 mm, 111.3300 mm): PTH pad 8 [GND] of RaspberryPi_Pico1
+    @(151.6150 mm, 111.3300 mm): PTH pad 13 [GND] of RaspberryPi_Pico1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(138.9150 mm, 111.3300 mm): PTH pad 8 [GND] of RaspberryPi_Pico1
+    @(126.2150 mm, 111.3300 mm): PTH pad 3 [GND] of RaspberryPi_Pico1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(151.6150 mm, 111.3300 mm): PTH pad 13 [GND] of RaspberryPi_Pico1
+    @(164.3150 mm, 111.3300 mm): PTH pad 18 [GND] of RaspberryPi_Pico1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(154.7600 mm, 79.0000 mm): PTH pad 2 [GND] of LORA2
+    @(151.6150 mm, 92.7500 mm): Pad 28 [GND] of RaspberryPi_Pico1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(164.3150 mm, 93.5500 mm): PTH pad 23 [GND] of RaspberryPi_Pico1
+    @(151.6150 mm, 93.5500 mm): PTH pad 28 [GND] of RaspberryPi_Pico1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(164.3150 mm, 111.3300 mm): PTH pad 18 [GND] of RaspberryPi_Pico1
+    @(164.3150 mm, 93.5500 mm): PTH pad 23 [GND] of RaspberryPi_Pico1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(164.3150 mm, 112.1300 mm): Pad 18 [GND] of RaspberryPi_Pico1 on F.Cu
+    @(169.6500 mm, 121.6750 mm): Pad 2 [GND] of R6 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(172.6000 mm, 121.6750 mm): Pad 2 [GND] of R7 on F.Cu
+    @(169.6500 mm, 121.6750 mm): Pad 2 [GND] of R6 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(178.5000 mm, 126.0850 mm): Pad 2 [GND] of R4 on F.Cu
+    @(172.6000 mm, 121.6750 mm): Pad 2 [GND] of R7 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(178.5000 mm, 126.0850 mm): Pad 2 [GND] of R4 on F.Cu
+    @(194.5000 mm, 124.5000 mm): Pad 3 [GND] of AOD4184A1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(192.0000 mm, 84.9500 mm): Pad 3 [GND] of ModuloDeCarga1 on F.Cu
+    @(195.2650 mm, 95.0000 mm): PTH pad 2 [GND] of SW1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(192.5650 mm, 83.1750 mm): PTH pad 9 [GND] of ModuloDeCarga1
+    @(192.0000 mm, 84.9500 mm): Pad 3 [GND] of ModuloDeCarga1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(194.5000 mm, 124.5000 mm): Pad 3 [GND] of AOD4184A1 on F.Cu
+    @(204.5000 mm, 108.9375 mm): Pad 1 [GND] of RLED1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(195.2650 mm, 95.0000 mm): PTH pad 2 [GND] of SW1
+    @(204.5000 mm, 99.8750 mm): Pad 1 [GND] of BLED1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.5000 mm, 104.3750 mm): Pad 1 [GND] of YLED1 on F.Cu
+    @(204.5000 mm, 99.8750 mm): Pad 1 [GND] of BLED1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.5000 mm, 108.9375 mm): Pad 1 [GND] of RLED1 on F.Cu
+    @(204.5000 mm, 104.3750 mm): Pad 1 [GND] of YLED1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(169.6500 mm, 127.9100 mm): Pad 1 [Net-(BLED1-A)] of R1 on F.Cu
+    @(204.5000 mm, 98.0000 mm): Pad 2 [Net-(BLED1-A)] of BLED1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(172.6000 mm, 123.5000 mm): Pad 1 [Net-(AOD4184A1-G)] of R7 on F.Cu
+    @(181.4500 mm, 121.6750 mm): Pad 2 [Net-(AOD4184A1-G)] of R11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(181.4500 mm, 121.6750 mm): Pad 2 [Net-(AOD4184A1-G)] of R11 on F.Cu
+    @(192.2200 mm, 118.2000 mm): Pad 2 [Net-(AOD4184A1-G)] of AOD4184A1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(172.6000 mm, 127.9100 mm): Pad 1 [Net-(YLED1-A)] of R2 on F.Cu
+    @(204.5000 mm, 102.5000 mm): Pad 2 [Net-(YLED1-A)] of YLED1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(156.6950 mm, 112.1300 mm): Pad 15 [LED_MODO] of RaspberryPi_Pico1 on F.Cu
+    @(172.6000 mm, 126.0850 mm): Pad 2 [LED_MODO] of R2 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(143.9950 mm, 93.5500 mm): PTH pad 31 [ADC_Bateria] of RaspberryPi_Pico1
+    @(169.6500 mm, 123.5000 mm): Pad 1 [ADC_Bateria] of R6 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(169.6500 mm, 123.5000 mm): Pad 1 [ADC_Bateria] of R6 on F.Cu
+    @(181.4500 mm, 126.0850 mm): Pad 2 [ADC_Bateria] of R5 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(125.5000 mm, 124.0000 mm): PTH pad 3 [3V3] of Display1
+    @(131.2950 mm, 93.5500 mm): PTH pad 36 [3V3] of RaspberryPi_Pico1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(157.3000 mm, 79.0000 mm): PTH pad 3 [3V3] of LORA2
+    @(131.2950 mm, 92.7500 mm): Pad 36 [3V3] of RaspberryPi_Pico1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(159.8400 mm, 79.0000 mm): PTH pad 4 [RST] of LORA2
+    @(156.6950 mm, 92.7500 mm): Pad 26 [RST] of RaspberryPi_Pico1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(162.3800 mm, 79.0000 mm): PTH pad 5 [DIO0] of LORA2
+    @(154.1550 mm, 92.7500 mm): Pad 27 [DIO0] of RaspberryPi_Pico1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(125.5000 mm, 118.9200 mm): PTH pad 1 [SDA] of Display1
+    @(133.8350 mm, 112.1300 mm): Pad 6 [SDA] of RaspberryPi_Pico1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(125.5000 mm, 121.4600 mm): PTH pad 2 [SCL] of Display1
+    @(136.3750 mm, 112.1300 mm): Pad 7 [SCL] of RaspberryPi_Pico1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(175.5500 mm, 127.9100 mm): Pad 1 [Net-(RLED1-A)] of R3 on F.Cu
+    @(204.5000 mm, 107.0625 mm): Pad 2 [Net-(RLED1-A)] of RLED1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(159.2350 mm, 112.1300 mm): Pad 16 [LED_ARMADO] of RaspberryPi_Pico1 on F.Cu
+    @(175.5500 mm, 126.0850 mm): Pad 2 [LED_ARMADO] of R3 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(121.1350 mm, 92.7500 mm): Pad 40 [VBUS] of RaspberryPi_Pico1 on F.Cu
+    @(130.5100 mm, 87.4000 mm): Pad 1 [VBUS] of C2 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(130.5100 mm, 87.4000 mm): Pad 1 [VBUS] of C2 on F.Cu
+    @(140.0000 mm, 82.0000 mm): Pad 2 [VBUS] of CHRG1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(140.0000 mm, 82.0000 mm): Pad 2 [VBUS] of CHRG1 on F.Cu
+    @(139.5000 mm, 76.0000 mm): Pad 2 [VBUS] of STDBY1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(193.2700 mm, 84.9500 mm): Pad 4 [VBUS] of ModuloDeCarga1 on F.Cu
+    @(140.0000 mm, 82.0000 mm): Pad 2 [VBUS] of CHRG1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(178.5000 mm, 123.5000 mm): Pad 1 [CHRG] of R9 on F.Cu
+    @(190.7300 mm, 80.0000 mm): Pad 7 [CHRG] of ModuloDeCarga1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(140.0000 mm, 83.8750 mm): Pad 1 [Net-(CHRG1-K)] of CHRG1 on F.Cu
+    @(178.5000 mm, 121.6750 mm): Pad 2 [Net-(CHRG1-K)] of R9 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(178.5000 mm, 127.9100 mm): Pad 1 [Net-(ModuloDeCarga1-PROG)] of R4 on F.Cu
+    @(190.7300 mm, 84.9500 mm): Pad 2 [Net-(ModuloDeCarga1-PROG)] of ModuloDeCarga1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(175.5500 mm, 123.5000 mm): Pad 1 [STDBY] of R8 on F.Cu
+    @(192.0000 mm, 80.0000 mm): Pad 6 [STDBY] of ModuloDeCarga1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(192.5000 mm, 106.0000 mm): PTH pad 1 [Net-(J1-Pin_1)] of J1
+    @(196.5000 mm, 90.5000 mm): PTH pad 3 [Net-(J1-Pin_1)] of SW2
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(139.5000 mm, 77.8750 mm): Pad 1 [Net-(STDBY1-K)] of STDBY1 on F.Cu
+    @(175.5500 mm, 121.6750 mm): Pad 2 [Net-(STDBY1-K)] of R8 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(169.3950 mm, 112.1300 mm): Pad 20 [IGNITION_GATE] of RaspberryPi_Pico1 on F.Cu
+    @(181.4500 mm, 123.5000 mm): Pad 1 [IGNITION_GATE] of R11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(189.9400 mm, 124.5000 mm): Pad 1 [Net-(AOD4184A1-D)] of AOD4184A1 on F.Cu
+    @(192.5000 mm, 101.0000 mm): PTH pad 2 [Net-(AOD4184A1-D)] of J1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(192.7250 mm, 95.0000 mm): PTH pad 1 [BTN_FIRE] of SW1
+    @(161.7750 mm, 111.3300 mm): PTH pad 17 [BTN_FIRE] of RaspberryPi_Pico1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(154.1550 mm, 112.1300 mm): Pad 14 [LED_LINK] of RaspberryPi_Pico1 on F.Cu
+    @(169.6500 mm, 126.0850 mm): Pad 2 [LED_LINK] of R1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(169.3950 mm, 92.7500 mm): Pad 21 [MISO] of RaspberryPi_Pico1 on F.Cu
+    @(160.0000 mm, 85.5000 mm): PTH pad 4 [MISO] of LORA1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(166.8550 mm, 92.7500 mm): Pad 22 [NSS] of RaspberryPi_Pico1 on F.Cu
+    @(154.9200 mm, 85.5000 mm): PTH pad 2 [NSS] of LORA1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(162.5400 mm, 85.5000 mm): PTH pad 5 [SCK] of LORA1
+    @(161.7750 mm, 92.7500 mm): Pad 24 [SCK] of RaspberryPi_Pico1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(159.2350 mm, 92.7500 mm): Pad 25 [MOSI] of RaspberryPi_Pico1 on F.Cu
+    @(157.4600 mm, 85.5000 mm): PTH pad 3 [MOSI] of LORA1
+
+** Found 0 Footprint errors **
+
+** Ignored checks **
+    - Footprint has no courtyard defined
+    - Track endpoint not centered on via
+    - Tuning profile track geometries
+    - Footprint doesn't match symbol's footprint filters
+    - PTH inside courtyard
+    - NPTH inside courtyard
+    - Footprint component type doesn't match footprint pads
+
+** End of Report **

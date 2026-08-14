@@ -153,12 +153,6 @@
 		(path "/41b7df2f-28da-42f8-bfd9-5b13ea0dd547")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -233,7 +227,7 @@
 			(uuid "58c651ad-b5d5-44fd-bfd8-2bcca34c858b")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -324,12 +318,6 @@
 		(path "/e3fb43eb-c770-4e2e-bd61-d2d1f2fc3314")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -455,7 +443,7 @@
 			(uuid "a08aeef2-9481-4486-878f-a12352139110")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/LED_SMD.3dshapes/LED_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/LED_SMD.3dshapes/LED_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -533,12 +521,6 @@
 		(path "/eb710d82-6530-44e5-875b-161ffaedd3cb")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -613,7 +595,7 @@
 			(uuid "b8edcdae-1290-41cd-ba98-5df043db0ad7")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -691,12 +673,6 @@
 		(path "/c6831604-d32a-49eb-84d1-f8604b16f6f4")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -771,7 +747,7 @@
 			(uuid "120254c8-2c44-4004-ac42-40f79ef07cdc")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -849,12 +825,6 @@
 		(path "/43e687d9-2394-4754-acae-0cef6cf800d9")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -1205,7 +1175,7 @@
 			(uuid "cde9310b-b55e-45f2-a088-ceabe261405f")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Connector_JST.3dshapes/JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal.step"
+		(model "${KICAD10_3DMODEL_DIR}/Connector_JST.3dshapes/JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1283,12 +1253,6 @@
 		(path "/aba6bf07-1db6-43de-84d6-36ecc2b623da")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -1363,7 +1327,7 @@
 			(uuid "9ee7e2fc-e417-4d44-ab7f-7337dbf8e391")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1441,12 +1405,6 @@
 		(path "/d98eacd6-a0cd-4d7c-ac2c-35f4dd2a8b0f")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2" "3" "4" "5" "6" "7" "8")
-			)
-		)
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -1670,7 +1628,7 @@
 			(uuid "dcc2bce9-6928-4db9-8e2c-8538fe78649e")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x08_P2.54mm_Vertical.step"
+		(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x08_P2.54mm_Vertical.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1748,12 +1706,6 @@
 		(path "/b3fac459-03c3-4841-acf5-2ce61f5ab97e")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2" "3" "4")
-			)
-		)
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -1933,7 +1885,7 @@
 			(uuid "ca2ddbbb-0808-467c-a9e5-91c726e2e539")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x04_P2.54mm_Vertical.step"
+		(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x04_P2.54mm_Vertical.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -2011,12 +1963,6 @@
 		(path "/21c90d64-8d2e-4dfc-a70b-977e7ae679cf")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -2091,7 +2037,7 @@
 			(uuid "71f2fb8d-ce61-47bf-b88f-10c0d9f7e43c")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -2169,12 +2115,6 @@
 		(path "/6d1a8e31-0803-465c-824d-3bd69a53e4a6")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -2249,7 +2189,7 @@
 			(uuid "9d190154-9d12-4582-b5e0-f2125b4c20c9")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -2327,12 +2267,6 @@
 		(path "/f3226e38-8694-4d6c-924f-f7ab45fb1292")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -2407,7 +2341,7 @@
 			(uuid "f8cdba56-75de-40e5-834e-7d146557807e")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -2485,12 +2419,6 @@
 		(path "/de5cc6fc-5a81-41cd-b117-3c66cc7bc436")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "8" "7" "6" "9" "4" "3" "5" "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -2911,7 +2839,7 @@
 			(uuid "f3706a2d-2527-440e-ad91-7a4db8337ce1")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.41x3.3mm.step"
+		(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.41x3.3mm.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -2989,12 +2917,6 @@
 		(path "/aab7bdac-f386-4c43-8113-638c1f15df69")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -3069,7 +2991,7 @@
 			(uuid "5a552faf-1db3-4cbf-aaac-fc6d1e3c0337")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -3146,12 +3068,6 @@
 		(path "/6c49b153-8bd7-42d4-a646-b5d6e9e69633")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "2" "1" "3")
-			)
-		)
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -3320,7 +3236,7 @@
 			(uuid "8b015fbb-7210-45df-b545-17b1f53bdd68")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x03_P2.54mm_Vertical.step"
+		(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x03_P2.54mm_Vertical.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -3411,12 +3327,6 @@
 		(path "/53de0e5e-d30b-444b-b37f-da24c5ade8f3")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -3542,7 +3452,7 @@
 			(uuid "592ffa99-7710-48df-9f9f-31358c308b49")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/LED_SMD.3dshapes/LED_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/LED_SMD.3dshapes/LED_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -3620,12 +3530,6 @@
 		(path "/9beb92ab-b89a-4ae2-b551-c11f10e5ed52")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -3700,7 +3604,7 @@
 			(uuid "2c603d1a-8489-4dae-802f-24c32cd26fe2")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -3778,12 +3682,6 @@
 		(path "/2f95c5d6-d793-433b-8ec3-70875724d883")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -4126,7 +4024,7 @@
 			(uuid "69958f4b-c2ab-452d-90ed-940da55fe3f8")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/TerminalBlock.3dshapes/TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm.step"
+		(model "${KICAD10_3DMODEL_DIR}/TerminalBlock.3dshapes/TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -4203,12 +4101,6 @@
 		(path "/d238b484-4300-4a1a-9fb6-701357cb8e51")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -4366,7 +4258,7 @@
 			(uuid "3666fe53-c6bc-454f-9f0e-d37c065a5f1b")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x02_P2.54mm_Vertical.step"
+		(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x02_P2.54mm_Vertical.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -4444,12 +4336,6 @@
 		(path "/27a531cd-0958-46e6-a7aa-2abcf0282695")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -4524,7 +4410,7 @@
 			(uuid "d816c302-ca59-48d7-9be3-4a495de05ae9")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -4615,12 +4501,6 @@
 		(path "/1a6aadf9-9432-48d5-b1d2-913c0107614b")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -4746,7 +4626,7 @@
 			(uuid "bb946876-6ee6-451c-b0bc-e61e23a95b13")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/LED_SMD.3dshapes/LED_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/LED_SMD.3dshapes/LED_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -4817,15 +4697,6 @@
 		(path "/747cc516-d63f-4153-a1a4-c1ef3e2d61b1")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "30" "37" "1" "2" "4" "5" "6" "7" "9" "10" "11" "12" "14" "15"
-					"16" "17" "19" "20" "39" "40" "23" "3" "8" "38" "13" "28" "18" "36"
-					"21" "22" "24" "25" "26" "27" "29" "35" "31" "32" "34" "33"
-				)
-			)
-		)
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -8400,7 +8271,7 @@
 		)
 		(zone
 			(layers "F.Cu" "F.Paste")
-			(uuid "55bcc942-c5a9-4c25-ad7a-ca790f244453")
+			(uuid "b5672243-cff2-4cbc-8a5b-e0d6ed7fcc1f")
 			(name "Pad Keep Out D3")
 			(hatch full 0.5)
 			(connect_pads
@@ -8440,7 +8311,7 @@
 		)
 		(zone
 			(layers "F.Cu" "F.Paste")
-			(uuid "b5672243-cff2-4cbc-8a5b-e0d6ed7fcc1f")
+			(uuid "55bcc942-c5a9-4c25-ad7a-ca790f244453")
 			(name "Pad Keep Out D1")
 			(hatch full 0.5)
 			(connect_pads
@@ -8701,7 +8572,7 @@
 			)
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Module.3dshapes/RaspberryPi_Pico_PinSockets_H8.50mm.step"
+		(model "${KICAD10_3DMODEL_DIR}/Module.3dshapes/RaspberryPi_Pico_PinSockets_H8.50mm.stpZ"
 			(hide yes)
 			(offset
 				(xyz 0 0 0)
@@ -8713,7 +8584,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "${KICAD10_3DMODEL_DIR}/Module.3dshapes/RaspberryPi_Pico.step"
+		(model "${KICAD10_3DMODEL_DIR}/Module.3dshapes/RaspberryPi_Pico.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -8724,7 +8595,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "${KICAD10_3DMODEL_DIR}/Module.3dshapes/RaspberryPi_Pico_AddedHeaders_H2.54mm.step"
+		(model "${KICAD10_3DMODEL_DIR}/Module.3dshapes/RaspberryPi_Pico_AddedHeaders_H2.54mm.stpZ"
 			(hide yes)
 			(offset
 				(xyz 0 0 0)
@@ -8736,7 +8607,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "${KICAD10_3DMODEL_DIR}/Module.3dshapes/RaspberryPi_Pico_H.step"
+		(model "${KICAD10_3DMODEL_DIR}/Module.3dshapes/RaspberryPi_Pico_H.stpZ"
 			(hide yes)
 			(offset
 				(xyz 0 0 0)
@@ -8748,7 +8619,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "${KICAD10_3DMODEL_DIR}/Module.3dshapes/RaspberryPi_Pico_W.step"
+		(model "${KICAD10_3DMODEL_DIR}/Module.3dshapes/RaspberryPi_Pico_W.stpZ"
 			(hide yes)
 			(offset
 				(xyz 0 0 0)
@@ -8760,7 +8631,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "${KICAD10_3DMODEL_DIR}/Module.3dshapes/RaspberryPi_Pico_W_AddedHeaders_H2.54mm.step"
+		(model "${KICAD10_3DMODEL_DIR}/Module.3dshapes/RaspberryPi_Pico_W_AddedHeaders_H2.54mm.stpZ"
 			(hide yes)
 			(offset
 				(xyz 0 0 0)
@@ -8772,7 +8643,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "${KICAD10_3DMODEL_DIR}/Module.3dshapes/RaspberryPi_Pico_WH.step"
+		(model "${KICAD10_3DMODEL_DIR}/Module.3dshapes/RaspberryPi_Pico_WH.stpZ"
 			(hide yes)
 			(offset
 				(xyz 0 0 0)
@@ -8851,12 +8722,6 @@
 		(path "/2e857636-8295-41a7-b9d0-bc21fc4015a4")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -8931,7 +8796,7 @@
 			(uuid "3a4f8fff-e02b-42a0-b103-27c36553b96e")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -9022,12 +8887,6 @@
 		(path "/7bebef80-b338-4d46-924b-041101a8726c")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -9153,7 +9012,7 @@
 			(uuid "c1666050-dd12-43d9-b341-92451d51eb9f")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/LED_SMD.3dshapes/LED_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/LED_SMD.3dshapes/LED_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -9243,12 +9102,6 @@
 		(path "/bd52eafb-651c-41b6-b132-ed7992dd4ab7")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "2" "1" "3")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -9486,7 +9339,7 @@
 			(uuid "e3319506-803b-4f39-9718-239b98da2a00")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/TO-252-2.step"
+		(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/TO-252-2.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -9564,12 +9417,6 @@
 		(path "/54bf65cc-c17c-418e-b94c-5ceb47040581")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -9644,7 +9491,7 @@
 			(uuid "1d8836da-81d7-4bfa-849f-866756182b0d")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -9735,12 +9582,6 @@
 		(path "/d1ef7d0e-0ff2-4472-915b-be8172f27a19")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -9866,7 +9707,7 @@
 			(uuid "90fb6200-0e7e-4e11-a45a-e435f7f9750b")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/LED_SMD.3dshapes/LED_0805_2012Metric.step"
+		(model "${KICAD10_3DMODEL_DIR}/LED_SMD.3dshapes/LED_0805_2012Metric.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -9944,12 +9785,6 @@
 		(path "/59bd9f1a-8885-47a4-a895-536e36e11a92")
 		(sheetname "/")
 		(sheetfile "ignition-system.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2" "3" "4" "5" "6" "7" "8")
-			)
-		)
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -10173,7 +10008,7 @@
 			(uuid "02812c39-302b-4c35-baf0-195861a1a045")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x08_P2.54mm_Vertical.step"
+		(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x08_P2.54mm_Vertical.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
