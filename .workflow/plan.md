@@ -34,7 +34,7 @@ ignitor validado por simulación SPICE, y Gerbers + BOM generados.
 
 | Wave | Focus | Status |
 |------|-------|--------|
-| 1 | Esquemático limpio: ERC 0, fixes TP4056 (CE→VBUS, TEMP), labels DIO, artefactos docs | [x] planned |
+| 1 | Esquemático limpio: ERC 0, fixes TP4056 (CE→VBUS, TEMP), labels DIO, artefactos docs | [x] in-flight (humano autorizado 2026-08-14) |
 | 2 | Validación de potencia por SPICE (gate 3.3V vs Vto 2.61V, disparo del ignitor) | [ ] planned |
 | 3 | PCB: reglas, planos de cobre, ruteo (HUMANO en GUI), DRC 0 | [ ] planned |
 | 4 | Release: Gerbers, BOM, PDF final, security-audit | [ ] planned |
@@ -144,4 +144,5 @@ Gerbers + BOM + PDF final — 100% headless con kicad-cli (agente) +
 | 2026-08-14 | `*.lck` a .gitignore | Archivos lock de KiCad abierto, ruido en git status |
 | 2026-08-14 | Drill 0.2mm del TP4056 se corrige en ola 3 | Es problema del footprint/board setup, no del esquemático |
 | 2026-08-14 | **Human-in-the-loop**: el humano edita en GUI, los agentes planifican/verifican/documentan/simulan | El ruteo y las ediciones visuales de KiCad no son automatizables de forma fiable por texto; 3 clics en GUI > cirugía de texto frágil (ponytail). Adaptación explícita de AGENTS.md a hardware |
+| 2026-08-14 | **Wave 1 autorizada** por el humano — plan confirmado sin cambios; arranque inmediato | Las 3 decisiones (CE→VBUS, TEMP→GND, DIO fuera) fueron confirmadas |
 | 2026-08-14 | `*.kicad_pro` prohibido en wave 1 | Los fixes de board setup (min hole) son de ola 3; mantener ola 1 mínima |
