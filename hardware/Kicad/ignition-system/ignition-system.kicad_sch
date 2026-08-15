@@ -3978,7 +3978,7 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 162.56) (xy 40.64 162.56)
+			(xy 38.1 160.02) (xy 40.64 160.02)
 		)
 		(stroke
 			(width 0)
@@ -4085,6 +4085,16 @@
 			(type default)
 		)
 		(uuid "34db9238-a4d3-40bf-9896-b1f5786c3f69")
+	)
+	(wire
+		(pts
+			(xy 62.23 167.64) (xy 62.23 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3ae4a73a-8157-43a2-ba94-6bc86b86f65f")
 	)
 	(wire
 		(pts
@@ -4378,16 +4388,6 @@
 	)
 	(wire
 		(pts
-			(xy 50.8 165.1) (xy 62.23 165.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "94f0d657-9ff4-4642-a922-45af122ab897")
-	)
-	(wire
-		(pts
 			(xy 193.04 148.59) (xy 195.58 148.59)
 		)
 		(stroke
@@ -4618,16 +4618,6 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 165.1) (xy 62.23 167.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cef4ff95-9551-473d-9dc2-e7ada0952879")
-	)
-	(wire
-		(pts
 			(xy 193.04 161.29) (xy 195.58 161.29)
 		)
 		(stroke
@@ -4795,6 +4785,16 @@
 			(type default)
 		)
 		(uuid "f6366fb1-3df4-498a-88a1-a079381ae8b8")
+	)
+	(wire
+		(pts
+			(xy 62.23 162.56) (xy 50.8 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f6a68c81-d359-49e5-84d3-f84c85bf4c25")
 	)
 	(wire
 		(pts
@@ -5676,7 +5676,7 @@
 	)
 	(global_label "VSYS"
 		(shape input)
-		(at 38.1 162.56 180)
+		(at 38.1 160.02 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5688,7 +5688,7 @@
 		)
 		(uuid "be77dcb7-d6bb-415e-a3dc-88f3149c3c8a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 30.0426 162.56 0)
+			(at 30.0426 160.02 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5957,6 +5957,85 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 40.64 165.1 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "08bfa32a-dee5-42d8-a60d-4c04777fd150")
+		(property "Reference" "#PWR015"
+			(at 34.29 165.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 36.83 165.0999 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 40.64 165.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 40.64 165.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 40.64 165.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "dd4c0ac8-0163-4a41-83e0-c66e4ddb88c7")
+		)
+		(instances
+			(project "ignition-system"
+				(path "/e17dc731-fbd5-49fb-b534-5ba28a19fa2e"
+					(reference "#PWR015")
+					(unit 1)
+				)
 			)
 		)
 	)
@@ -7044,7 +7123,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_SPDT")
-		(at 45.72 162.56 0)
+		(at 45.72 162.56 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7074,7 +7153,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
+		(property "Footprint" "Button_Switch_THT:SW_E-Switch_EG1224_SPDT_Angled"
 			(at 45.72 162.56 0)
 			(hide yes)
 			(show_name no)
@@ -7086,7 +7165,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 45.72 170.18 0)
+			(at 45.72 154.94 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
