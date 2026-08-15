@@ -7,9 +7,9 @@ A solid-state, remote ignition system designed for experimental rocketry. Built 
 
 ## 🧠 System Architecture
 * **Microcontroller:** Raspberry Pi Pico (RP2040)
-* **Firmware:** Written in Rust 🦀 (Async with Embassy framework)
-* **Telemetry & Comms:** NRF24L01+ modules
-* **Power Switching:** Logic-Level N-Channel MOSFETs
+* **Firmware:** Rust 🦀 with Embassy — **planned, not implemented yet** (see [Hardware status](#-hardware-status))
+* **Telemetry & Comms:** LoRa / NRF24L01+ modules
+* **Power Switching:** Logic-Level N-Channel MOSFET (AOD4184A)
 
 ## 📂 Repository Structure
 * `/hardware/`: KiCad project files (Schematics and PCB layouts).
@@ -18,6 +18,8 @@ A solid-state, remote ignition system designed for experimental rocketry. Built 
 
 ## 🛠️ Getting Started
 ### Firmware (Rust)
+⚠️ **Not available yet.** The `src/` directory is empty: the Rust/Embassy firmware is planned but has not been written. The steps below are reserved for when it lands:
+
 1. Install Rust and the `thumbv6m-none-eabi` target:
    `rustup target add thumbv6m-none-eabi`
 2. Install `elf2uf2-rs` for easy flashing:
@@ -25,4 +27,15 @@ A solid-state, remote ignition system designed for experimental rocketry. Built 
 3. Build and run: `cargo run --release`
 
 ### Hardware
-Open the project in KiCad 8.x or newer located in the `/hardware/` directory. 
+Open the project in KiCad 8.x or newer located in the `/hardware/` directory.
+
+## 📋 Hardware status
+
+Schematics and PCB live in `/hardware/Kicad/ignition-system/`. Current status
+(wave 1, in progress — see [`docs/design-notes.md`](docs/design-notes.md) for
+the full design reference):
+
+* **Schematic:** RP2040 (Pico) + TP4056 Li-ion charger + AOD4184A N-MOSFET ignition switch + 2× LoRa/nRF24 headers + I2C display + status LEDs. Fixes in progress (TP4056 CE→VBUS, TEMP→GND, stray DIO labels).
+* **PCB:** placed, **not routed** (0 tracks/vias). DRC: 34 violations (6 drill 0.2mm < 0.3mm min + 28 silkscreen) and 59 unconnected pads — pending wave 3.
+* **Firmware:** `src/` is empty; no Rust/Embassy code exists yet.
+* **Next:** wave 2 SPICE validation of the MOSFET gate margin (3.3V vs Vto 2.61V). 
