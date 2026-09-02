@@ -38,7 +38,7 @@ ignitor validado por simulación SPICE, y Gerbers + BOM generados.
 | Wave | Focus | Status |
 |------|-------|--------|
 | 1 | Esquemático limpio: ERC 0, fixes TP4056 (CE→VBUS, TEMP), labels DIO, artefactos docs | [x] integrated (ERC 0 verificado 2026-08-18) |
-| 2 | Validación de potencia por SPICE (gate 3.3V vs Vto 2.61V, disparo del ignitor) | [x] integrated 2026-09-01 (veredicto OK para rutear, pendiente audit) |
+| 2 | Validación de potencia por SPICE (gate 3.3V vs Vto 2.61V, disparo del ignitor) | [x] audited 2026-09-01 (APPROVED WITH EXCEPTIONS, ver `.workflow/audits/wave2.md`) |
 | 3 | PCB: reglas, planos de cobre, ruteo (HUMANO en GUI), DRC 0 | [ ] planned |
 | 4 | Release: Gerbers, BOM, PDF final, security-audit | [ ] planned |
 
@@ -200,4 +200,5 @@ Gerbers + BOM + PDF final — 100% headless con kicad-cli (agente) +
 | 2026-09-01 | ngspice-45 + spice-find/spice-get instalados globalmente; ola 2 desbloqueada y lista para lanzar | Executor-3 usa el modelo local `Local Spice/AOD4184A.lib`; fallback: `spice-find aod4184a` + `spice-get aod4184a` (crea `localSpice.lib`) si el modelo local falla en ngspice |
 | 2026-09-01 | **Wave 2 integrada** — merge `wave2-executor-3` (2c1a827) a main, sin conflictos. ERC integrado: 0 errores / 0 warnings (H4 humano cerró los 2 menores). Sim reproducida en ngspice-45: exit 0. Veredicto REPORT.md: (a) OK para rutear con AOD4184A, condición: medir ignitor real ≤1.1 A al recibirlo. Gate de la ola 3: VERDE | Merge 9c72979; commits a9de791 (kicad_pro humano) + 2c1a827 |
 | 2026-09-01 | **Wave 2 in-flight**: worktree `../dst-ig-wave2-executor-3` creado, executor-3 lanzado por el humano | Plan de integración wave 2 sin cambios: merge `wave2-executor-3` → main al terminar |
+| 2026-09-01 | **Auditoría wave 2: APPROVED WITH EXCEPTIONS** (`.workflow/audits/wave2.md`) — números del informe reproducidos por el auditor, ERC integrado 0/0, `.raw` byte-idénticos al re-corrida. Excepciones: (1) `a9de791` tocó `kicad_pro` fuera del map (side-effect GUI del humano, 1 línea, mitigado); (2) ola 1 sin archivo de auditoría formal — gates re-verificados aquí. Regla nueva: cada ola cierra con su audit file | Gate ola 3 VERDE con condición: medir ignitor real ≤1.1 A al recibirlo |
 | 2026-09-01 | **Causa raíz de los 2 warnings ERC** (`unconnected_wire_endpoint`): 4 segmentos de cable sobrantes junto a CHRG1 (156.21, 171.45) y STDBY1 (156.21, 184.15) — restos de los labels DIO borrados en wave 1. Fix = tarea H4 (humano, GUI): borrar el wire horizontal desde el pin K (que ya tiene label VBUS encima) + el stub vertical de 2.54mm que cuelga hacia arriba, en cada LED | Los pines de los LEDs ya están conectados (K→VBUS por label, A→R8/R9); el alambrado sobrante sobra. Tras el fix: ERC objetivo 0 errores / 0 warnings |
