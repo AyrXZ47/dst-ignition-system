@@ -1,0 +1,118 @@
+* ignition-sim.cir -- Validacion SPICE del disparo del ignitor (wave 2, executor 3)
+*
+* Subcircuito (low-side, segun docs/design-notes.md 1 y esquemático KiCad):
+*   GPIO15 (fuente pulsada 0->3.3V) -> R11 220R -> gate AOD4184A
+*   R7 10k pull-down gate->GND
+*   VSYS 3.6V (LiPo nominal) -> J1 ignitor (RIGN 1-2R) -> drain; source a GND
+*
+* Modelo VDMOS inline (autocontenido, sin includes) copiado de:
+*   hardware/Kicad/ignition-system/Local Spice/AOD4184A.lib
+*   (extraido de Bordodynovs Electronics Lib; Vto=2.61, Kp=70, Rd=3.8m,
+*    Cgs=1365p, tt=42n; verificado que ngspice-45 lo carga sin warnings)
+*
+* Ejecutar con: bash run.sh   (desde este directorio o desde la raiz del repo)
+
+.model AOD4184A VDMOS(Kp=70.0022 Rs=0.0001 Rd=0.0038 Rg=3.0 Vto=2.61
++ mtriode=0.8 Ksubthres=0.1 Lambda=0.11 Cgdmax=1294p Cgdmin=24p Cgs=1365p
++ tt=42n A=0.22 Is=5.47E-14 N=0.88 Rb=0.005291 M=0.678 Vj=1.44 Cjo=500.0pF
++ mfg=AOS Vds=40 Ron=5.8m Qg=14n)
+
+.param rign=1.5
+.param vsys=3.6
+
+* Ignitor (e-match) entre VSYS y drain
+RIGN vsys drain {rign}
+* Bateria: LiPo 1S nominal (parametrizada para el caso de margen a 3.3V)
+VSYS vsys 0 {vsys}
+* GPIO15: flanco 0->3.3V a t=100us, subida 1us (peor caso realista), ON 5ms
+VGPIO gpio 0 PULSE(0 3.3 100u 1u 1u 5m 10m)
+* Red de gate
+R11 gpio gate 220
+R7  gate 0   10k
+* MOSFET low-side: D=drain(ignitor) G=gate S=0 B=0
+M1 drain gate 0 0 AOD4184A
+
+.control
+set noaskquit
+set filetype=ascii
+
+* ============ CASO 1: nominal, ignitor 1.5R @ VSYS 3.6V ============
+tran 50n 600u 0 500n
+let idd = -i(vsys)
+meas tran vgs_final AVG v(gate)  FROM=400u TO=600u
+meas tran id_final  AVG idd      FROM=400u TO=600u
+meas tran vds_final AVG v(drain) FROM=400u TO=600u
+wrdata out/case1-tran-1p5ohm-3p6v.raw v(gate) v(drain) idd
+echo "CASE1 rign=1.5 vsys=3.6 -> id_final / vds_final / vgs_final:"
+destroy all
+reset
+
+* ============ CASO 2: margenes de ignitor (2R y 1R) + peor caso ============
+* 2a: ignitor 2R (limite alto), LiPo nominal
+alterparam rign=2
+reset
+tran 50n 600u 0 500n
+let idd = -i(vsys)
+meas tran id_2ohm  AVG idd     FROM=400u TO=600u
+meas tran vds_2ohm AVG v(drain) FROM=400u TO=600u
+wrdata out/case2a-tran-2ohm-3p6v.raw v(drain) idd
+echo "CASE2a rign=2 vsys=3.6 -> id_2ohm / vds_2ohm:"
+destroy all
+reset
+
+* 2b: ignitor 1R (limite bajo), LiPo nominal
+alterparam rign=1
+reset
+tran 50n 600u 0 500n
+let idd = -i(vsys)
+meas tran id_1ohm  AVG idd      FROM=400u TO=600u
+meas tran vds_1ohm AVG v(drain) FROM=400u TO=600u
+wrdata out/case2b-tran-1ohm-3p6v.raw v(drain) idd
+echo "CASE2b rign=1 vsys=3.6 -> id_1ohm / vds_1ohm:"
+destroy all
+reset
+
+* 2c (margen extra): peor caso LiPo descargada 3.3V + ignitor 2R
+alterparam rign=2
+alterparam vsys=3.3
+reset
+tran 50n 600u 0 500n
+let idd = -i(vsys)
+meas tran id_worst  AVG idd      FROM=400u TO=600u
+meas tran vds_worst AVG v(drain) FROM=400u TO=600u
+wrdata out/case2c-tran-2ohm-3p3v.raw v(drain) idd
+echo "CASE2c rign=2 vsys=3.3 (peor caso) -> id_worst / vds_worst:"
+destroy all
+reset
+
+* ============ CASO 3: barrido DC Id vs Vgs (carga fija 1.5R) ============
+alterparam rign=1.5
+alterparam vsys=3.6
+reset
+* Para el barrido el GPIO se trata como fuente DC de 0 a 3.3V en pasos de 0.1V
+dc VGPIO 0 3.3 0.1
+let idd = -i(vsys)
+meas dc id_at_3v3 FIND idd AT=3.3
+meas dc vgs_at_1a WHEN idd=1
+meas dc vds_at_3v3 FIND v(drain) AT=3.3
+wrdata out/case3-dc-idvsvgs.raw idd v(drain) v(gate)
+echo "CASE3 dc sweep 0->3.3V paso 0.1 -> id_at_3v3 / vgs_at_1a / vds_at_3v3:"
+destroy all
+reset
+
+* ============ CASO 4: slew del gate (R11 220R + Ciss) -> tiempo al 90% ============
+* Mismas condiciones que caso 1, paso fino en el flanco (GPIO sube a t=100us)
+tran 10n 150u 0 50n
+let idd = -i(vsys)
+meas tran id_f4 AVG idd    FROM=120u TO=150u
+meas tran vgs_f4 AVG v(gate) FROM=120u TO=150u
+meas tran t90_id   WHEN idd='0.9*id_f4'      TD=100u
+meas tran t90_gate WHEN v(gate)='0.9*vgs_f4' TD=100u
+meas tran id_pk MAX idd TD=100u
+wrdata out/case4-gate-slew.raw v(gate) idd
+echo "CASE4 slew -> t90_id / t90_gate / id_pk (condiciones de caso 1):"
+destroy all
+reset
+quit
+.endc
+.end
