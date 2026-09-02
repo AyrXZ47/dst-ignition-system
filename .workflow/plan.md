@@ -181,9 +181,11 @@ reales del ignitor incorporados (condición del audit de wave 2).
    línea ~155) + DRC: las 6 violaciones `drill_out_of_range` del TP4056
    desaparecen. **ANTES de que el humano abra la GUI** (evita pisar el
    `.kicad_pro` con KiCad abierto).
-2. **H5 (humano, mundo físico):** protocolo de medición del ignitor con
-   multímetro (Fase A no destructiva + Fase B destructiva opcional) →
-   reportar R_min/R_typ/R_max, R_wire y, si hace Fase B, I_fire medido.
+2. **H5 (humano, mundo físico) — [x] HECHO 2026-09-02:** ignitores medidos
+   (datos completos en decision log): R lote n=10 → min 0.8 / typ 0.93 /
+   max 1.1Ω (2 multímetros). Fase B: 4/4 disparos con pila 3V, I > 200mA
+   (rango 200mA en overload). Margen verificado: I_worst ≈ 2.47A ≥ 1.1A.
+   **Condición del REPORT.md de wave 2: CERRADA — veredicto (a) confirmado.**
 3. **T7 (executor-4):** incorporar los números reales a `docs/design-notes.md`
    (§6 ignitor) y re-chequeo de margen: `I_worst = 3.3/(R_max + R_wire + 0.034)`
    debe ser ≥ 1.1A (condición del informe SPICE). Si falla → ESCALAR al
@@ -255,4 +257,5 @@ Gerbers + BOM + PDF final — 100% headless con kicad-cli (agente) +
 | 2026-09-01 | **Wave 2 in-flight**: worktree `../dst-ig-wave2-executor-3` creado, executor-3 lanzado por el humano | Plan de integración wave 2 sin cambios: merge `wave2-executor-3` → main al terminar |
 | 2026-09-01 | **Auditoría wave 2: APPROVED WITH EXCEPTIONS** (`.workflow/audits/wave2.md`) — números del informe reproducidos por el auditor, ERC integrado 0/0, `.raw` byte-idénticos al re-corrida. Excepciones: (1) `a9de791` tocó `kicad_pro` fuera del map (side-effect GUI del humano, 1 línea, mitigado); (2) ola 1 sin archivo de auditoría formal — gates re-verificados aquí. Regla nueva: cada ola cierra con su audit file | Gate ola 3 VERDE con condición: medir ignitor real ≤1.1 A al recibirlo |
 | 2026-09-01 | **Causa raíz de los 2 warnings ERC** (`unconnected_wire_endpoint`): 4 segmentos de cable sobrantes junto a CHRG1 (156.21, 171.45) y STDBY1 (156.21, 184.15) — restos de los labels DIO borrados en wave 1. Fix = tarea H4 (humano, GUI): borrar el wire horizontal desde el pin K (que ya tiene label VBUS encima) + el stub vertical de 2.54mm que cuelga hacia arriba, en cada LED | Los pines de los LEDs ya están conectados (K→VBUS por label, A→R8/R9); el alambrado sobrante sobra. Tras el fix: ERC objetivo 0 errores / 0 warnings |
+| 2026-09-02 | **H5: ignitor real medido por el humano.** Lote n=10, 2 multímetros: R min 0.8 / typ 0.93 / max 1.1Ω (spread ≤0.3, lote consistente). Fase B: 4/4 disparados con pila 3V vía amperímetro; rango 200mA → OVERLOAD (I > 200mA real); la lectura "0.01A" del rango 10A se descarta como artefacto de display (el burst dura ms, el DMM muestrea ~3/s; a 10mA con 0.93Ω habría solo 0.1mW — físicamente imposible disparar). **Chequeo de margen (T7):** I_worst = 3.3/(1.1 + 0.2 + 0.034) ≈ **2.47A** ≥ 1.1A (margen 2.25×); nominal 3.6V → 2.70A; P ignitor ≈ 6.7W por pulso; P MOSFET ≈ 0.21W por pulso (trivial para DPAK). R_wire no medido: estimado 0.2Ω conservador | **Cierra la condición del REPORT.md wave 2: veredicto (a) CONFIRMADO con datos reales** — sin driver, sin cambiar MOSFET. Nota BOM: usar LiPo 1S ≥500mAh (pulso 2.7A trivial para cualquier celda ≥1C). Datos fuente para T7 de executor-4 |
 | 2026-09-01 | **T6 (wave 3) integrada a main** — merge `wave3-executor-4` (82d910d, merge 75974c5), sin conflictos. DRC en árbol integrado: `drill_out_of_range` = 0 (las 6 del TP4056 desaparecieron); quedan 54 violaciones / 61 unconnected, todas categorías pre-ruteo (H6 pendiente). Nota: el grep literal del brief (`: "0.2"`) no matchea porque KiCad serializa el número sin comillas; semántica verificada en el diff (0.3→0.2, 1 línea) | Board setup corregido ANTES de que el humano abra la GUI, según orden estricto de wave 3 |
