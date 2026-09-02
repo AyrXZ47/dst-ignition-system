@@ -18,7 +18,10 @@ ignitor validado por simulación SPICE, y Gerbers + BOM generados.
   sch export pdf, pcb drc, pcb export gerbers).
 - Modelo SPICE local: `hardware/Kicad/ignition-system/Local Spice/AOD4184A.lib`
   (VDMOS, Vto=2.61V, Ron=5.8mΩ).
-- Simulación: ngspice (a instalar en ola 2) o simulador de KiCad GUI.
+- Simulación: ngspice-45 (instalado globalmente 2026-09-01, gate de la ola 2
+  desbloqueado). Auxiliares del humano: `spice-find` / `spice-get`
+  (kicad-spice-library, ~50k modelos; `spice-get aod4184a` extrae un modelo
+  saneado y validado en ngspice a `localSpice.lib` del proyecto).
 - Ignitor/e-match estándar (~1-2Ω, ~1A) — pendiente confirmar con el humano.
 - Licencias: hardware CERN-OHL-P-2.0, software Apache-2.0.
 - **Modelo de trabajo: HUMAN-IN-THE-LOOP (adaptación del flujo AGENTS.md a
@@ -144,8 +147,7 @@ SPICE primero; el ruteo (ola 3) no empieza hasta que esta ola dé verde.
       (corriente de ignitor a 3.3V, a 3.6V LiPo, con R11=220Ω), correr en
       ngspice, escribir informe con veredicto → brief:
       `.workflow/briefs/wave2-executor-3.md`
-- Requisito: instalar ngspice (`nix profile install nixpkgs#ngspice` o el
-  equivalente en tu distro) — lo hace el executor o el humano.
+- Requisito: instalar ngspice — **hecho** (ngspice-45 global, 2026-09-01).
 
 ### Integration plan
 
@@ -190,3 +192,5 @@ Gerbers + BOM + PDF final — 100% headless con kicad-cli (agente) +
 | 2026-08-18 | **Una placa, dos roles (RX/TX)** | El usuario confirma: un solo diseño con todas las secciones; al llegar de China una placa se arma como RX y otra como TX (diferente firmware/DNP según rol). Esto NO cambia el esquemático ni el ruteo: las secciones (radio, ignición, carga) ya existen en una placa |
 | 2026-08-18 | **SPICE ANTES del ruteo** (ola 2 → ola 3) | Si el AOD4184A no conduce a 3.3V, cambia la zona de potencia y el ruteo entero; evitar re-spin |
 | 2026-08-18 | `*.kicad_pro` prohibido en wave 1 | Los fixes de board setup (min hole) son de ola 3; mantener ola 1 mínima |
+| 2026-09-01 | Designators renombrados con sufijo de chip: `LORA1-Sx1278`, `LORA2-Sx1278`, `Display1-SSD1306`, `RaspberryPi_Pico1-RP2040` (commit 40ce5ba) | Cierra 2 preguntas abiertas de design-notes §6: radio = LoRa SX1278, display = SSD1306. ERC re-verificado hoy: 0 errores / 2 warnings menores conocidos |
+| 2026-09-01 | ngspice-45 + spice-find/spice-get instalados globalmente; ola 2 desbloqueada y lista para lanzar | Executor-3 usa el modelo local `Local Spice/AOD4184A.lib`; fallback: `spice-find aod4184a` + `spice-get aod4184a` (crea `localSpice.lib`) si el modelo local falla en ngspice |
