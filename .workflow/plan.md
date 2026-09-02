@@ -166,13 +166,66 @@ SPICE primero; el ruteo (ola 3) no empieza hasta que esta ola dé verde.
 
 ---
 
-## Wave 3 (future — not detailed yet)
+## Wave 3 (current — next wave)
 
-PCB — **HUMANO en GUI** (ruteo no es automatizable de forma fiable). El
-agente prepara: ajuste de min hole del board setup (0.3→0.2mm o cambio de
-footprint del TP4056 — se puede editar en `*.kicad_pro`, texto JSON),
-planos GND/VBUS sugeridos, y verifica con `kicad-cli pcb drc` hasta 0.
-Ruteo: el humano con router interactivo (o freerouting, bajo supervisión).
+### Objetivo
+
+PCB listo para fabricar: reglas de board setup corregidas (executor-4),
+placement + ruteo hechos por el HUMANO en GUI, DRC 0 errores, y datos
+reales del ignitor incorporados (condición del audit de wave 2).
+
+### Orden estricto
+
+1. **T6 (executor-4):** board setup `min_through_hole_diameter` 0.3 → 0.2mm
+   en `.kicad_pro` (JSON, clave `"design_settings.rules.min_through_hole_diameter"`,
+   línea ~155) + DRC: las 6 violaciones `drill_out_of_range` del TP4056
+   desaparecen. **ANTES de que el humano abra la GUI** (evita pisar el
+   `.kicad_pro` con KiCad abierto).
+2. **H5 (humano, mundo físico):** protocolo de medición del ignitor con
+   multímetro (Fase A no destructiva + Fase B destructiva opcional) →
+   reportar R_min/R_typ/R_max, R_wire y, si hace Fase B, I_fire medido.
+3. **T7 (executor-4):** incorporar los números reales a `docs/design-notes.md`
+   (§6 ignitor) y re-chequeo de margen: `I_worst = 3.3/(R_max + R_wire + 0.034)`
+   debe ser ≥ 1.1A (condición del informe SPICE). Si falla → ESCALAR al
+   planner inmediatamente (revive veredicto b/c de wave 2).
+4. **H6 (humano, GUI):** placement por bloques lógicos + ruteo (guía paso a
+   paso del planner al llegar aquí: plano GND, anchos de pista de potencia).
+5. **T8 (executor-4):** `kicad-cli pcb drc` loop hasta 0 errores y 0
+   unconnected.
+
+### File ownership map
+
+| File/glob | Owner |
+|-----------|-------|
+| `.kicad_pro` (SOLO la clave min_through_hole_diameter) | executor-4 (T6) |
+| `ignition-system.kicad_pcb` | HUMANO (GUI) — placement y ruteo |
+| `docs/design-notes.md` (§ ignitor, § estado PCB) | executor-4 (T7) |
+| `ignition-system.kicad_sch` | congelado en wave 3, salvo decisión post-ignitor del planner |
+| `sim/wave2/*`, `.workflow/*` | prohibidos para executor-4 |
+
+> Nota (práctica observada en `a9de791`): si la GUI de KiCad reordena el
+> `.kicad_pro` al guardar, commitearlo como `chore(kicad):` separado.
+
+### Integration plan
+
+Rama única de executor: `wave3-executor-4` (worktree análogo a la ola 2).
+El humano commitea `.kicad_pcb` directamente en main. Secuencia: T6 →
+H5+T7 → H6 (ruteo) → T8 → DRC final en main:
+
+```bash
+kicad-cli pcb drc --output /tmp/opencode/drc-final.rpt \
+  hardware/Kicad/ignition-system/ignition-system.kicad_pcb   # "Errors 0"
+```
+
+En conflicto: STOP y reportar.
+
+### Audit gate
+
+- DRC en main: 0 errores, 0 unconnected (evidencia: drc-final.rpt).
+- Las 6 drill_out_of_range ya no existen.
+- design-notes tiene los datos REALES del ignitor y el chequeo de margen.
+- Archivo de auditoría `.workflow/audits/wave3.md` (cierra la excepción 2
+  de wave 2: cada ola termina con su audit).
 
 ## Wave 4 (future — not detailed yet)
 
