@@ -6955,7 +6955,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "59bd9f1a-8885-47a4-a895-536e36e11a92")
-		(property "Reference" "LORA1"
+		(property "Reference" "LORA1-Sx1278"
 			(at 254 71.1199 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7037,7 +7037,7 @@
 		(instances
 			(project "ignition-system"
 				(path "/e17dc731-fbd5-49fb-b534-5ba28a19fa2e"
-					(reference "LORA1")
+					(reference "LORA1-Sx1278")
 					(unit 1)
 				)
 			)
@@ -7377,7 +7377,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "747cc516-d63f-4153-a1a4-c1ef3e2d61b1")
-		(property "Reference" "RaspberryPi_Pico1"
+		(property "Reference" "RaspberryPi_Pico1-RP2040"
 			(at 144.3833 116.84 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7555,7 +7555,7 @@
 		(instances
 			(project "ignition-system"
 				(path "/e17dc731-fbd5-49fb-b534-5ba28a19fa2e"
-					(reference "RaspberryPi_Pico1")
+					(reference "RaspberryPi_Pico1-RP2040")
 					(unit 1)
 				)
 			)
@@ -8302,7 +8302,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b3fac459-03c3-4841-acf5-2ce61f5ab97e")
-		(property "Reference" "Display1"
+		(property "Reference" "Display1-SSD1306"
 			(at 120.65 162.5599 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8372,7 +8372,7 @@
 		(instances
 			(project "ignition-system"
 				(path "/e17dc731-fbd5-49fb-b534-5ba28a19fa2e"
-					(reference "Display1")
+					(reference "Display1-SSD1306")
 					(unit 1)
 				)
 			)
@@ -8894,7 +8894,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d98eacd6-a0cd-4d7c-ac2c-35f4dd2a8b0f")
-		(property "Reference" "LORA2"
+		(property "Reference" "LORA2-Sx1278"
 			(at 219.71 71.1199 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8976,7 +8976,7 @@
 		(instances
 			(project "ignition-system"
 				(path "/e17dc731-fbd5-49fb-b534-5ba28a19fa2e"
-					(reference "LORA2")
+					(reference "LORA2-Sx1278")
 					(unit 1)
 				)
 			)

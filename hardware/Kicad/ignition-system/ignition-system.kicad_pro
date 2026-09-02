@@ -669,7 +669,7 @@
         "uuid": "e17dc731-fbd5-49fb-b534-5ba28a19fa2e"
       }
     ],
-    "used_designators": "CHRG1,YLED1,STDBY1,LORA2,RaspberryPi_Pico1,RLED1,Amarillo(Modo/Rol)1,SW3,Azul(Sistema/Link)1,Rojo(Armado/Peligro)1,ModuloDeCarga1,InBatt1,BLED1,Display1,#PWR7,#PWR11-12,#PWR14-15",
+    "used_designators": "CHRG1,YLED1,STDBY1,LORA2,RaspberryPi_Pico1,RLED1,Amarillo(Modo/Rol)1,SW3,#PWR7,#PWR11-12,#PWR14-15,Display1,Azul(Sistema/Link)1,Rojo(Armado/Peligro)1,ModuloDeCarga1,InBatt1,BLED1",
     "variants": []
   },
   "sheets": [
