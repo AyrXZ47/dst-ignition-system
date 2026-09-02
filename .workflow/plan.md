@@ -38,7 +38,7 @@ ignitor validado por simulación SPICE, y Gerbers + BOM generados.
 | Wave | Focus | Status |
 |------|-------|--------|
 | 1 | Esquemático limpio: ERC 0, fixes TP4056 (CE→VBUS, TEMP), labels DIO, artefactos docs | [x] integrated (ERC 0 verificado 2026-08-18) |
-| 2 | Validación de potencia por SPICE (gate 3.3V vs Vto 2.61V, disparo del ignitor) | [x] planned — SIGUIENTE |
+| 2 | Validación de potencia por SPICE (gate 3.3V vs Vto 2.61V, disparo del ignitor) | [ ] in-flight — executor-3 lanzado 2026-09-01 |
 | 3 | PCB: reglas, planos de cobre, ruteo (HUMANO en GUI), DRC 0 | [ ] planned |
 | 4 | Release: Gerbers, BOM, PDF final, security-audit | [ ] planned |
 
@@ -138,11 +138,15 @@ SPICE primero; el ruteo (ola 3) no empieza hasta que esta ola dé verde.
 | File/glob | Owner |
 |-----------|-------|
 | `sim/wave2/*.cir`, `sim/wave2/*.cpp` (nuevos), informe | executor-3 |
-| `hardware/Kicad/ignition-system/*` | prohibido (ni lectura requerida salvo el .lib) |
+| `hardware/Kicad/ignition-system/*` | prohibido para executor-3 (ni lectura requerida salvo el .lib y el .kicad_sch) |
+| `hardware/Kicad/ignition-system/ignition-system.kicad_sch` | HUMANO, SOLO para H4 (borrar stubs; nada más) |
 | `docs/design-notes.md` | prohibido salvo añadir §7 "Validación SPICE" (revisar con planner si hace falta) |
 
 ### Tasks
 
+- [ ] H4 (humano, GUI, paralelo con executor-3): borrar los 4 stubs de cable
+      sueltos junto a CHRG1/STDBY1 → ERC 0/0 (ver brief manual H4 en el
+      decision log; causas y coordenadas documentadas 2026-09-01)
 - [ ] T3: Generar netlist SPICE del subcircuito de ignición, casos de test
       (corriente de ignitor a 3.3V, a 3.6V LiPo, con R11=220Ω), correr en
       ngspice, escribir informe con veredicto → brief:
@@ -194,3 +198,5 @@ Gerbers + BOM + PDF final — 100% headless con kicad-cli (agente) +
 | 2026-08-18 | `*.kicad_pro` prohibido en wave 1 | Los fixes de board setup (min hole) son de ola 3; mantener ola 1 mínima |
 | 2026-09-01 | Designators renombrados con sufijo de chip: `LORA1-Sx1278`, `LORA2-Sx1278`, `Display1-SSD1306`, `RaspberryPi_Pico1-RP2040` (commit 40ce5ba) | Cierra 2 preguntas abiertas de design-notes §6: radio = LoRa SX1278, display = SSD1306. ERC re-verificado hoy: 0 errores / 2 warnings menores conocidos |
 | 2026-09-01 | ngspice-45 + spice-find/spice-get instalados globalmente; ola 2 desbloqueada y lista para lanzar | Executor-3 usa el modelo local `Local Spice/AOD4184A.lib`; fallback: `spice-find aod4184a` + `spice-get aod4184a` (crea `localSpice.lib`) si el modelo local falla en ngspice |
+| 2026-09-01 | **Wave 2 in-flight**: worktree `../dst-ig-wave2-executor-3` creado, executor-3 lanzado por el humano | Plan de integración wave 2 sin cambios: merge `wave2-executor-3` → main al terminar |
+| 2026-09-01 | **Causa raíz de los 2 warnings ERC** (`unconnected_wire_endpoint`): 4 segmentos de cable sobrantes junto a CHRG1 (156.21, 171.45) y STDBY1 (156.21, 184.15) — restos de los labels DIO borrados en wave 1. Fix = tarea H4 (humano, GUI): borrar el wire horizontal desde el pin K (que ya tiene label VBUS encima) + el stub vertical de 2.54mm que cuelga hacia arriba, en cada LED | Los pines de los LEDs ya están conectados (K→VBUS por label, A→R8/R9); el alambrado sobrante sobra. Tras el fix: ERC objetivo 0 errores / 0 warnings |
