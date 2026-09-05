@@ -190,8 +190,8 @@ reales del ignitor incorporados (condición del audit de wave 2).
    (§6 ignitor) y re-chequeo de margen: `I_worst = 3.3/(R_max + R_wire + 0.034)`
    debe ser ≥ 1.1A (condición del informe SPICE). Si falla → ESCALAR al
    planner inmediatamente (revive veredicto b/c de wave 2).
-4. **H6 (humano, GUI):** placement por bloques lógicos + ruteo (guía paso a
-   paso del planner al llegar aquí: plano GND, anchos de pista de potencia).
+4. **H6 (humano, GUI):** placement por bloques lógicos + ruteo →
+   brief manual: `.workflow/briefs/wave3-human-routing.md`
 5. **T8 (executor-4):** `kicad-cli pcb drc` loop hasta 0 errores y 0
    unconnected.
 
