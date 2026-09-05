@@ -1,89 +1,108 @@
-# Audit — Wave 3 (PCB: board setup, ruteo HUMANO, DRC 0)
+# Audit — Wave 3 (auditoría completa, estado 2026-09-04)
 
-**Fecha:** 2026-09-02 · **Auditor:** sesión fresca, árbol integrado en `main` @ `6b27b1f`
-**Alcance:** estado actual de la ola 3 — hito **T6 integrada** (merge `75974c5`,
-commit `82d910d`). La ola NO está cerrada: H5/T7/H6/T8 siguen pendientes.
+**Fecha:** 2026-09-04 · **Auditor:** sesión fresca, árbol integrado en `main` @ `54443c5`
+**Alcance:** "audita todo" — re-verificación de los gates de waves 1-2 y estado
+completo de la wave 3 (T6 ✓ integrada, H5 ✓, T7 ✓ en rama, H6/T8 pendientes).
+Supersede el audit de hito T6 (2026-09-02, conservado en commit `a9d27cc`).
 
-## Veredicto: APPROVED (milestone T6) — wave 3 gate OPEN
+## Veredicto: APPROVED WITH EXCEPTIONS
 
-T6 está correctamente integrada y verificada con evidencia. El audit gate
-completo de la ola 3 (DRC 0 errores / 0 unconnected + datos reales del
-ignitor en design-notes) **aún no puede evaluarse**: no se ha cumplido el
-orden estricto pendiente (H5 → T7 → H6 → T8). Nada en el árbol integrado
-bloquea continuar con H5.
+Todo lo que dice estar hecho lo está, y resiste evidencia: ERC 0, SPICE
+reproducible, T6 se sostiene en HEAD, T7 correcto con aritmética verificada.
+La wave 3 NO cierra todavía (el gate DRC 0/0 exige H6→T8, pendientes por
+orden estricto). Dos excepciones ACCIONABLES listadas abajo; la primera
+bloquea abrir KiCad para H6.
 
 ## 1. Integridad de integración
 
-- [x] `git merge-base --is-ancestor 82d910d main` → `ANCESTOR-OK` (merge
-      `75974c5` trajo la rama `wave3-executor-4` completa).
-- [x] `git status` limpio; `git stash list` vacío; un solo worktree extra
-      (`dst-ig-wave3-executor-4` @ `82d910d`), esperado: executor-4 conserva
-      T7/T8.
-- [x] Diff vs plan (`git diff 46f3a95..main --stat`, desde el cierre del
-      audit wave 2): solo `.workflow/audits/wave2.md`,
-      `.workflow/briefs/wave3-executor-4.md`, `.workflow/plan.md` y
-      `ignition-system.kicad_pro` (1 línea). Todo dentro del ownership map:
-      `.workflow/*` = planner/auditor; `.kicad_pro` SOLO la clave concedida
-      a T6.
-- [x] `git show 82d910d` → 1 archivo, 1 inserción, 1 borrado:
-      `"min_through_hole_diameter": 0.3 → 0.2` en `design_settings.rules`.
-      Ninguna otra clave tocada.
-- [x] `.kicad_pcb` NO modificado desde wave 1 (ausente en el diff) — H6 no
-      ha empezado, consistente con el estado.
+- [x] `git status`: **sucio** — `ignition-system.kicad_pro` modificado sin
+      commitear. `git stash list` vacío. **Hallazgo H-2 (CRÍTICO-acción):**
+      el diff sin commitear REVIERTE T6: `min_through_hole_diameter`
+      0.2 → 0.3 (1 hunk, 1 línea). Evidencia DRC abajo: con esta reversión
+      las 6 `drill_out_of_range` del TP4056 VUELVEN.
+- [x] Ramas: `wave3-executor-4` tip `faacd71` = origin (pusheada). Worktree
+      extra único (`dst-ig-wave3-executor-4`), esperado.
+- [x] **T7 NO está integrada**: `git log main..wave3-executor-4` →
+      `faacd71 docs: anotar medidas reales del ignitor`; en main,
+      design-notes.md sigue en `225ae7d` con "confirmar tipo real (~1-2Ω)".
+      **Hallazgo H-3 (acción, owner: integrador):** merge `faacd71` → main.
+- [x] Ownership map desde el cierre del audit wave 2 (`46f3a95..main`):
+      solo `.workflow/*` y el `.kicad_pro` (1 clave, T6) ✓. Commit T7
+      `faacd71`: solo `docs/design-notes.md` (§4 BOM + §6, archivos
+      concedidos al executor-4) ✓. Sin desviaciones nuevas.
+- [x] `.kicad_pcb` sin cambios desde wave 1 (último commit previo
+      `36a9e48`) — H6 sin empezar, consistente con el plan.
 
 ## 2. Build & tests (evidencia, árbol integrado)
 
-- [x] **ERC** (`kicad-cli sch erc`, regesión):
-      `** ERC messages: 0  Errors 0  Warnings 0` — sin regresión.
-- [x] **DRC** (`kicad-cli pcb drc` → `/tmp/opencode/drc-w3-audit.rpt`):
-      `** Found 54 DRC violations ** ** Found 61 unconnected pads **`,
-      `drill_out_of_range` = **0** (grep cuenta 0). Las 6 del TP4056
-      desaparecieron — gate de T6 cumplido.
-- [x] Categorías de las 54 (clasificación del .rpt): 22 silk_over_copper,
-      14 silk_overlap, 6 clearance, 5 solder_mask_bridge, 2 shorting_items,
-      2 hole_to_hole, 2 courtyards_overlap, 1 lib_footprint_mismatch —
-      todas normales en un board sin colocar/rutear. Coincide con el
-      decision log ("54 / 61, categorías pre-ruteo").
-- [x] `.kicad_pro` integrado línea 155: `"min_through_hole_diameter": 0.2`
-      (sin comillas: serialización numérica de KiCad).
-- [~] **Verify command del brief T6** pasa solo semánticamente: el
-      `grep '"min_through_hole_diameter": "0.2"'` del brief nunca matchea
-      porque KiCad serializa el número sin comillas. **Hallazgo H-1 (menor,
-      brief)**: corregir la línea del verify en
-      `.workflow/briefs/wave3-executor-4.md` antes de T8 (ej. grep sin
-      comillas o chequeo del .rpt). Ya anotado en decision log (fila T6);
-      el brief sigue sin corregir.
-- [ ] T7/T8: no ejecutables aún (dependen de H5 y H6 del humano). No es
-      fallo: orden estricto del plan.
+- [x] **ERC** (`kicad-cli sch erc` → `/tmp/opencode/erc-audit-todo.rpt`):
+      `Found 0 violations`, exit 0. Gate de wave 1 sigue verde sin regresión.
+- [x] **DRC en HEAD (0.2)** — copia de HEAD a /tmp, auditor no toca worktree:
+      `** Found 54 DRC violations **`, `drill_out_of_range` = **0** (grep
+      cuenta 0), 61 unconnected. Categorías pre-ruteo, igual que el audit T6.
+- [x] **DRC en working tree (0.3 revertido)** →
+      `/tmp/opencode/drc-audit-worktree.rpt`: `** Found 60 DRC violations **`,
+      `drill_out_of_range` = **6**. Prueba de impacto de H-2.
+- [x] **T7 verify** (`grep -qiE 'R_max|R_máx|ignitor.*(medid|Ω|ohm)'` contra
+      el contenido de la rama): **PASS**.
+- [x] **Aritmética de T7 reproducida** (awk):
+      `I_worst = 3.3/(1.1+0.2+0.034) = 2.4738 A ≥ 1.1 A` (margen 2.25×);
+      nominal 3.6V → 2.6987 A; P_ignitor(nom) 6.77 W ≈ "6.7 W" ✓;
+      P_mosfet(I_worst) 0.208 W ≈ "0.21 W" ✓. Números del design-notes y
+      decision log correctos. Condición del REPORT.md wave 2 (≤1.1 A)
+      CERRADA: veredicto (a) confirmado con datos reales.
+- [x] **SPICE reproducible** (`bash sim/wave2/run.sh` en árbol integrado):
+      exit 0, `OK: simulacion completa`; `git status` tras la corrida solo
+      muestra el `.kicad_pro` preexistente — los `.raw` reproducen
+      byte-idéntico (gate wave 2 sigue verde).
+- [x] **Wave 2 artifacts**: `sim/wave2/REPORT.md` mantiene veredicto (a) y
+      la condición `≤1.1 A` que T7 cierra. `docs/ignition-system.pdf`
+      presente (gate wave 1).
+- [ ] T8 (DRC final 0 errores / 0 unconnected): no ejecutable — H6 pendiente.
+      No es fallo: orden estricto del plan.
 
 ## 3. Disciplina ponytail
 
-- [x] Diff mínimo: 1 línea de configuración, sin deps nuevas, sin
-      abstracciones, sin archivos extra.
-- [x] Commit `build:` (no `chore:`) correcto: la regla afecta DRC.
-- [x] Sin `ponytail:` nuevos requeridos (no hay lógica, es setup).
+- [x] Sin deps nuevas; T7 = 1 archivo de docs, +15/−2; T6 = 1 línea.
+- [x] Branch isolation respetada: executor-4 pushea solo su rama; T7
+      sin mergear (correcto, no se auto-mergeó).
+- [x] Sin `ponytail:` nuevos requeridos (docs + 1 línea de regla).
+- [~] H-1 (menor, heredado del audit T6, owner: planner): la verify line del
+      brief T6 sigue con el grep comillado que nunca matchea
+      (`briefs/wave3-executor-4.md:71`). Sin corregir. Semántica ya
+      verificada por diff aquí: HEAD tiene el valor 0.2 sin comillas.
 
 ## 4. Seguridad
 
-- [x] Scan de secretos en `git diff 46f3a95..main`: solo matches de texto
-      dentro de `wave2.md` (cita del propio checklist) — sin secretos.
-- [x] Sin trust boundaries nuevas (1 cambio de regla JSON local).
+- [x] Scan de secretos (`git grep -iE 'api_key|secret|token|password|PRIVATE KEY'`,
+      excluyendo skills/.gitignore/audits): matches solo en
+      `audit-checklist.md` (su propia regex) y `LICENSE-HARDWARE` (texto
+      legal) — sin secretos reales.
+- [x] Sin trust boundaries nuevas (docs + reglas de board).
 - N/A Release gate `skills/security-audit`: ola 4 (plan).
 
-## 5. Excepciones
+## 5. Excepciones y acciones (owners)
 
-1. **H-1 (menor, owner: planner)**: verify command del brief T6/T8 usa un
-   grep que no matchea la serialización de KiCad. Mitigado: el decision log
-   ya documenta la semántica verificada por diff; la evidencia DRC de esta
-   auditoría es independiente. Acción: 1 línea en el brief antes de T8.
-2. **Cierre de ola 3 pendiente**: este archivo registra el hito T6; al
-   terminar H5→T7→H6→T8 el planner debe pedir re-auditoría para cerrar el
-   gate (DRC 0/0 + ignitor real en design-notes §6, que hoy dice
-   "confirmar tipo real (~1-2Ω, ~1A esperado)" — sin datos medidos).
+1. **H-2 (CRÍTICO-acción, owner: humano/integrador, ANTES de H6):** el
+   working tree contiene la reversión de T6 sin commitear. Si el humano
+   abre la GUI y guarda, la reversión entra al commit del ruteo y las 6
+   `drill_out_of_range` vuelven (evidencia: DRC 60 vs 54). Acción: en main,
+   `git restore hardware/Kicad/ignition-system/ignition-system.kicad_pro`
+   y verificar que vuelve a `0.2`. No commitear la reversión.
+2. **H-3 (acción, owner: integrador):** merge `wave3-executor-4` (`faacd71`,
+   T7) → main. Sin conflicto esperado: design-notes no cambió en main desde
+   `225ae7d`. El gate de wave 3 exige design-notes con los datos reales en
+   el árbol integrado; hoy solo están en la rama.
+3. **H-1 (menor, owner: planner):** corregir la verify line del brief
+   (grep sin comillas) antes de T8. Heredada del audit T6.
 
-## Conclusión y ruta
+## Ruta para cerrar la wave 3
 
-Continuar con **H5** (medición del ignitor, protocolo del plan) → **T7**
-(chequeo de margen `I_worst = 3.3/(R_max + R_wire + 0.034) ≥ 1.1 A`; si
-falla, escalar al planner) → **H6** (placement + ruteo en GUI) → **T8**
-(DRC loop) → re-auditoría de cierre de la ola 3.
+1. Ejecutar H-2 y H-3 (restore del `.kicad_pro` + merge T7).
+2. **H6** (humano, GUI): brief `.workflow/briefs/wave3-human-routing.md`
+   (net class Power, contorno ~50×70mm, placement por bloques, plano GND en
+   B.Cu, ruteo lazo de ignición primero).
+3. **T8** (executor-4): `kicad-cli pcb drc` hasta 0 errores / 0 unconnected.
+4. Re-auditoría de cierre: gate DRC 0/0 + design-notes integrado →
+   veredicto sin excepciones de acción → ola 4 (Gerbers/BOM/PDF +
+   `skills/security-audit`).
