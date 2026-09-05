@@ -119,7 +119,7 @@ valores de display/módulos con el humano.
 | BLED1, YLED1, RLED1 | LED | 0805 | Estado: enlace/modo/armado |
 | CHRG1, STDBY1 | LED | 0805 | Estado de carga |
 | Display1 | Conector 1x04 | PinHeader 2.54mm | Display I2C |
-| InBatt1 | Conector 1x02 | JST PH 2.0mm | Batería LiPo 1S |
+| InBatt1 | Conector 1x02 | JST PH 2.0mm | Batería LiPo 1S (≥500mAh: pulso de ignición ~2.7A) |
 | J1 | Terminal 1x02 | MX126-5.0-02P 5.0mm | Ignitor/e-match |
 | LORA1, LORA2 | Conector 1x08 | PinHeader 2.54mm | Módulos LoRa/nRF24 |
 | SW1 | Pulsador | PinHeader 1x02 | BTN_FIRE |
@@ -148,7 +148,20 @@ valores de display/módulos con el humano.
   slew rate con R11=220Ω y picos en el pull-down R7.
 - **Firmware**: `src/` está vacío; el Rust/Embassy prometido en el README aún
   no existe (ver README, §Estado del hardware).
-- **Ignitor/e-match**: confirmar tipo real (~1-2Ω, ~1A esperado).
+- **Ignitor/e-match — RESUELTO 2026-09-02 (medido, lote n=10)**: R_min/R_typ/
+  R_max = **0.8 / 0.93 / 1.1 Ω** (2 multímetros, spread ≤0.3Ω, lote
+  consistente). R_wire del cableado no medido: estimado **0.2Ω** conservador.
+  Fase B destructiva: 4/4 ignitores disparados con pila 3V vía amperímetro;
+  rango 200mA en OVERLOAD → I_fire > 200mA real (la lectura "0.01A" del rango
+  10A se descarta como artefacto de display: el burst dura ms, el DMM muestrea
+  ~3/s; a 10mA con 0.93Ω habría solo 0.1mW — físicamente imposible).
+  **Chequeo de margen**: `I_worst = 3.3 / (R_max + R_wire + 0.034)` =
+  3.3 / (1.1 + 0.2 + 0.034) ≈ **2.47A ≥ 1.1A** (margen 2.25×). Nominal
+  3.6V → 2.70A. P ignitor ≈ 6.7W por pulso; P MOSFET ≈ 0.21W por pulso
+  (trivial para DPAK). **Cierra la condición del REPORT.md de wave 2:
+  veredicto (a) CONFIRMADO con datos reales** — AOD4184A se queda, sin driver
+  ni cambio de MOSFET. Fuente: decision log de `.workflow/plan.md`
+  (entrada 2026-09-02).
 - **Módulos de radio**: confirmar LoRa vs nRF24 definitivo; LORA2 solo tiene
   RST/DIO0 cableados.
 - **Display**: confirmar modelo I2C (SSD1306) y si el conector 1x04 basta.
