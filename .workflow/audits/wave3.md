@@ -83,6 +83,16 @@ bloquea abrir KiCad para H6.
 
 ## 5. Excepciones y acciones (owners)
 
+> **RESOLUCIÓN 2026-09-04 (mismo día, integrador):** H-2 y H-3 ejecutados y
+> verificados. H-2: copia de seguridad del estado sucio en
+> `/tmp/opencode/kicad_pro.dirty.bak`, `git restore` del `.kicad_pro` →
+> árbol limpio, valor `0.2` (línea 155) verificado. H-3: merge
+> `wave3-executor-4` (`faacd71`, T7) → main con `--no-ff` (`1877ec3`), sin
+> conflictos. Árbol integrado post-merge: ERC 0, DRC 54/61 pre-ruteo con
+> `drill_out_of_range` = 0, T7 grep PASS en main, SPICE exit 0 y
+> `git status` limpio tras re-corrida. Queda solo H-1 (planner) y el gate
+> DRC 0/0 pendiente de H6→T8.
+
 1. **H-2 (CRÍTICO-acción, owner: humano/integrador, ANTES de H6):** el
    working tree contiene la reversión de T6 sin commitear. Si el humano
    abre la GUI y guarda, la reversión entra al commit del ruteo y las 6
