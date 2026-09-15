@@ -176,6 +176,17 @@ reales del ignitor incorporados (condición del audit de wave 2).
 
 ### Orden estricto
 
+0. **H7 (humano, GUI) + T9 (executor-4) — ANTES de seguir el ruteo —
+   2026-09-15:** consolidar la radio en UN header. Diagnóstico: SPI está en
+   LORA1 y RST/DIO0/3V3/GND en LORA2 (un RA-02 físico no cabe en ese split;
+   LORA2 nunca tuvo SPI). Fix: borrar LORA2-Sx1278, conectar en LORA1 los
+   pines libres (1, 6, 7, 8) a las labels/nets existentes RST, DIO0, 3V3 y
+   GND. GPIO sin cambios (RST=GPIO20, DIO0=GPIO21, SPI=GPIO16-19). El rol
+   TX/RX es puro firmware: un transceptor half-duplex da para ambas placas
+   del par. H7: humano en GUI, ERC 0/0, commit. T9: executor-4 verifica ERC,
+   regenera `docs/ignition-system.pdf` y actualiza design-notes (§2 pin map
+   sin LORA2, §4 BOM, §6 nota radio). BOM pierde 1 conector 1x08.
+
 1. **T6 (executor-4):** board setup `min_through_hole_diameter` 0.3 → 0.2mm
    en `.kicad_pro` (JSON, clave `"design_settings.rules.min_through_hole_diameter"`,
    línea ~155) + DRC: las 6 violaciones `drill_out_of_range` del TP4056
@@ -201,8 +212,9 @@ reales del ignitor incorporados (condición del audit de wave 2).
 |-----------|-------|
 | `.kicad_pro` (SOLO la clave min_through_hole_diameter) | executor-4 (T6) |
 | `ignition-system.kicad_pcb` | HUMANO (GUI) — placement y ruteo |
-| `docs/design-notes.md` (§ ignitor, § estado PCB) | executor-4 (T7) |
-| `ignition-system.kicad_sch` | congelado en wave 3, salvo decisión post-ignitor del planner |
+| `docs/design-notes.md` (§ ignitor/estado PCB → T7 [hecho]; §2 pin map, §4 BOM, §6 nota radio → T9) | executor-4 |
+| `docs/ignition-system.pdf` | executor-4 (T9: regenerado con kicad-cli tras H7) |
+| `ignition-system.kicad_sch` | HUMANO SOLO para H7 (borrar LORA2 + reconectar RST/DIO0/3V3/GND a LORA1); si no, congelado |
 | `sim/wave2/*`, `.workflow/*` | prohibidos para executor-4 |
 
 > Nota (práctica observada en `a9de791`): si la GUI de KiCad reordena el

@@ -40,10 +40,15 @@ lazo de ignición lo más corto posible.
 │ [TP4056] C1  R4  C2   [PICO — centro,      │   ← bloque CARGA a la izq.
 │  CHRG STDBY LEDs]      horizontal]         │
 ├────────────────────────────────────────────┤
-│ Display1        LORA1 ────────── LORA2     │   ← radio a la derecha,
-│ SW1 botón  LEDs estado (borde inferior)    │      antenas hacia fuera
+│ Display1        LORA1 (ÚNICO) ──           │   ← UN header de radio,
+│ SW1 botón  LEDs estado (borde inferior)    │      antena hacia el borde
 └────────────────────────────────────────────┘
 ```
+
+> **OJO (2026-09-15): ya NO hay LORA2.** La radio se consolidó en una sole
+> LORA1 (NSS/MOSI/MISO/SCK + RST/DIO0/3V3/GND). El rol TX/RX es firmware:
+> un RA-02 por placa. Si ya habías colocado LORA2 en el PCB, bórralo
+> (sobre él: clic derecho → Delete) y recoloca LORA1.
 
 Reglas de placement que NO se negocian:
 1. **Lazo de ignición compacto:** InBatt/SW2 → J1 → MOSFET drain, en ese

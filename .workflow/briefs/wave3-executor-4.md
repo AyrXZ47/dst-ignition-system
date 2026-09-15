@@ -23,6 +23,14 @@ Tres tareas SECUENCIALES (una commit por tarea):
   `sim/wave2/REPORT.md`). **Si da < 1.1 A: PARA y reporta al planner — no
   decidas tú cambiar MOSFET ni driver.** Si da OK, anota el resultado con la
   fórmula y los números en design-notes.
+- **T9 (tras el fix H7 del humano, ANTES de que siga el ruteo):** el humano
+  consolidó la radio en un header: borró LORA2-Sx1278 y reconectó RST/DIO0/
+  3V3/GND a LORA1-Sx1278 (ver decision log 2026-09-15). Verifica ERC 0/0,
+  regenera `docs/ignition-system.pdf` con kicad-cli y actualiza
+  `docs/design-notes.md`: §2 (pin map — RST/DIO0 ahora en LORA1, borra la
+  nota de LORA2), §4 (BOM — fuera el conector de LORA2), §6 (nota radio →
+  "UN SX1278 RA-02 por placa; rol TX/RX por firmware; transceptor half-duplex").
+
 - **T8 (cuando el humano termine el ruteo):** corre `kicad-cli pcb drc`,
   reporta el resultado al planner. Si hay errores: reporta el .rpt COMPLETO
   (tú no ruteas, no edites el .kicad_pcb). Itera solo cuando el humano diga
@@ -40,8 +48,9 @@ Tres tareas SECUENCIALES (una commit por tarea):
 ## Files you own
 
 - `hardware/Kicad/ignition-system/ignition-system.kicad_pro` (SOLO T6, SOLO
-  la clave min_through_hole_diameter)
-- `docs/design-notes.md` (SOLO §4 BOM y §6 ignitor/estado PCB)
+  la clave min_through_hole_diameter) — T6 ya integrada
+- `docs/design-notes.md` (§4, §6 en T7; §2, §4, §6 en T9)
+- `docs/ignition-system.pdf` (SOLO T9: regeneración con kicad-cli)
 
 ## Files forbidden
 
