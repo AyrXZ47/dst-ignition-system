@@ -69,7 +69,13 @@
           "thermal_relief_spoke_width": 0.5
         }
       },
-      "diff_pair_dimensions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        }
+      ],
       "drc_exclusions": [],
       "meta": {
         "version": 2
@@ -203,7 +209,9 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [],
+      "track_widths": [
+        0.0
+      ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -230,7 +238,12 @@
           "spacing": 0.6
         }
       },
-      "via_dimensions": [],
+      "via_dimensions": [
+        {
+          "diameter": 0.0,
+          "drill": 0.0
+        }
+      ],
       "zones_allow_external_fillets": false
     },
     "ipc2581": {
@@ -689,7 +702,7 @@
         "uuid": "e17dc731-fbd5-49fb-b534-5ba28a19fa2e"
       }
     ],
-    "used_designators": "TH1,RaspberryPi_Pico1,LORA2,RLED1,Amarillo(Modo/Rol)1,SW3,#PWR4-5,#PWR7,#PWR11-12,#PWR14-16,Display1,LORA\\-Sx1278(B)1,Azul(Sistema/Link)1,Rojo(Armado/Peligro)1,LORA\\-Sx1278(A)1,InBatt1,BLED1,ModuloDeCarga1,CHRG1,YLED1,STDBY1",
+    "used_designators": "LORA\\-Sx1278(B)1,Azul(Sistema/Link)1,Rojo(Armado/Peligro)1,Display1,#PWR4-5,#PWR7,#PWR11-12,#PWR14-16,IGNITOR1,STDBY1,LORA2,YLED1,CHRG1,#FLG1,TH1,RaspberryPi_Pico1,LORA\\-Sx1278(A)1,ModuloDeCarga1,BLED1,InBatt1,RLED1,Amarillo(Modo/Rol)1,SW3",
     "variants": []
   },
   "sheets": [
