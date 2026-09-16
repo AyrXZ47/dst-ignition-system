@@ -176,20 +176,24 @@ reales del ignitor incorporados (condición del audit de wave 2).
 
 ### Orden estricto
 
-0. **H7b (humano, GUI) — ANULA el H7 anterior (2026-09-15, diagnóstico
-   corregido):** el esquemático ORIGINAL ya era correcto. LORA1 y LORA2
-   (Conn_01x08) son los DOS BORDES de un mismo módulo RA-02 (17×16mm, 8
-   agujeros por borde): fila A = GND,NSS,MOSI,MISO,SCK,DIO5,DIO4,GND;
-   fila B = GND,GND,3V3,RST,DIO0,DIO1..DIO3. El wiring existente casa 1:1
-   con las filas físicas — era el socket del módulo, no dos radios. Fix
-   real: completar el socket con los GND físicos de los bordes: LORA1
-   pin1→GND, LORA1 pin8→GND, LORA2 pin1→GND (DIO1-5 sueltos: el firmware
-   solo usa DIO0). ERC 0/0. En el PCB: headers JUNTOS como socket —
-   separación centro-a-centro = la medida real del módulo físico (~13-16mm,
-   el humano la mide), filas paralelas y opuestas. El rol TX/RX sigue
-   siendo puro firmware (transceptor half-duplex): esa conclusión NO cambia.
-   T9 queda como verificación post-H7b (ERC + PDF + design-notes §2/§4/§6
-   sin el texto de "header único"; LORA2 continúa).
+0. **H7b (humano, GUI) — el "H7 consolidar radio" fue ANULADO 2026-09-15**
+   (diagnóstico corregido, ver decision log): LORA1+LORA2 son el SOCKET del
+   RA-02 (17×16mm, 8 agujeros por borde del módulo; el wiring existente
+   casa 1:1 con las filas físicas — fila A = LORA1, fila B = LORA2). Fix:
+   completar el socket con los GND físicos de borde: LORA1 pin1→GND,
+   LORA1 pin8→GND, LORA2 pin1→GND (DIO1-5 sueltos: el firmware solo usa
+   DIO0). ERC 0/0. En el PCB: headers JUNTOS como socket (separación =
+   medida real del módulo, filas en espejo). El rol TX/RX sigue por
+   firmware.
+0b. **H8 (humano, GUI) — NTC de carga (revierte parcialmente la decisión
+    wave 1 TEMP→GND directo; el PCM va integrado en la celda):** en el
+    esquemático, desconectar el pin 1 (TEMP) del ModuloDeCarga1 del GND y
+    añadir un `Device:Thermistor_NTC` (Value: `NTC 10k B3950`) entre TEMP y
+    GND; footprint: `PinHeader_1x02_P2.54mm_Vertical` (el NTC epoxy se suelda
+    con sus dos patas al header, pegado con kapton a la superficie de la
+    celda). Ventana térmica resultante ≈ 0–45°C de carga. ERC 0/0 + commit.
+    En el PCB: el nuevo footprint cerca de InBatt (el sensor va al pack,
+    no al aire). BOM +1 ítem.
 
 1. **T6 (executor-4):** board setup `min_through_hole_diameter` 0.3 → 0.2mm
    en `.kicad_pro` (JSON, clave `"design_settings.rules.min_through_hole_diameter"`,
@@ -214,11 +218,13 @@ reales del ignitor incorporados (condición del audit de wave 2).
 
 | File/glob | Owner |
 |-----------|-------|
-| `.kicad_pro` (SOLO la clave min_through_hole_diameter) | executor-4 (T6) |
 | `ignition-system.kicad_pcb` | HUMANO (GUI) — placement y ruteo |
+| `ignition-system.kicad_sch` | HUMANO SOLO para H7b (3 GND socket RA-02) y H8 (NTC al TEMP — ver decision log 2026-09-15b) |
+| `.kicad_pro` (SOLO la clave min_through_hole_diameter) | executor-4 (T6) |
 | `docs/design-notes.md` (§ ignitor/estado PCB → T7 [hecho]; §2 pin map, §4 BOM, §6 nota radio → T9) | executor-4 |
 | `docs/ignition-system.pdf` | executor-4 (T9: regenerado con kicad-cli tras H7b) |
-| `ignition-system.kicad_sch` | HUMANO SOLO para H7b (añadir 3 GND del socket RA-02: LORA1 pin1, LORA1 pin8, LORA2 pin1); si no, congelado |
+| `ignition-system.kicad_sch` | — (definido arriba; la double-entrada anterior queda obsoleta) |
+| `docs/design-notes.md` (§ ignitor/estado PCB → T7 [hecho]; §2 pin map, §4 BOM, §6 nota radio/NTC + estado PCB → T9) | executor-4 |
 | `sim/wave2/*`, `.workflow/*` | prohibidos para executor-4 |
 
 > Nota (práctica observada en `a9de791`): si la GUI de KiCad reordena el
@@ -279,3 +285,4 @@ Gerbers + BOM + PDF final — 100% headless con kicad-cli (agente) +
 | 2026-09-15 | **CORRECCIÓN: se revoca la consolidación de radio (H7 → H7b).** La anatomía física del RA-02 (2 filas de 8 agujeros, un borde por cara del módulo de 17×16mm) demuestra que LORA1+LORA2 del esquemático original ya eran el SOCKET del módulo — no dos radios ni variantes TX/RX. El wiring existente casa 1:1 con las filas físicas; solo faltan 3 GND de borde. El planner erró al leer el socket como "módulo partido" — la foto física aportada por el humano fue la evidencia faltante. Lo que sobrevive de la decisión anterior: el rol TX/RX es puro firmware (transceptor half-duplex, un módulo por placa) | Falibilidad registrada: leer netlist sin contexto físico induce a error en hardware. Nada del H7 original llegó a archivo (ni .sch ni .pcb tocaron LORA2); el fix real es mínimo (3 wires) |
 | 2026-09-01 | **T6 (wave 3) integrada a main** — merge `wave3-executor-4` (82d910d, merge 75974c5), sin conflictos. DRC en árbol integrado: `drill_out_of_range` = 0 (las 6 del TP4056 desaparecieron); quedan 54 violaciones / 61 unconnected, todas categorías pre-ruteo (H6 pendiente). Nota: el grep literal del brief (`: "0.2"`) no matchea porque KiCad serializa el número sin comillas; semántica verificada en el diff (0.3→0.2, 1 línea) | Board setup corregido ANTES de que el humano abra la GUI, según orden estricto de wave 3 |
 | 2026-09-15 | **Protección de batería v1: celda LiPo CON protección integrada (PCM, "protected") + corte por firmware.** El TP4056 es solo cargador (termina a 4.2V; NO protege de sobre-descarga ni de corto en descarga; TEMP→GND = sin NTC). Nivel de celda en display: YA cableado (divisor R5/R6 10k/10k → GPIO26/ADC; 4.2V→2.1V dentro del rango ADC del Pico); el % y las advertencias son de FIRMWARE (ola de software). Regla de firmware: no medir durante el pulso de ignición (el sag de 2.7A corrompe la lectura). NTC al pin TEMP: diferido — solo si V consigue celda con NTC de 3 hilos, se añade el divisor en un fix posterior | La vía con cero cambios de diseño es comprar celda protegida; ponytail: no metemos NTC al PCB que se está por rutear sin la celda concreta en mano |
+| 2026-09-15b | **REVISA la fila anterior (2026-09-15, protección de batería): V comprará NTC 10k B3950 pegado a la celda; la celda lleva PCM integrado.** La protección eléctrica vive en el PCM de la celda; el TEMP del TP4056 recupera su función térmica con el NTC externo. H8: pin 1 (TEMP) del ModuloDeCarga1 deja de ir directo a GND → va por `Device:Thermistor_NTC` (Value `NTC 10k B3950`, footprint `PinHeader_1x02_P2.54mm_Vertical`) a GND; ventana térmica ≈ 0–45°C. La regla de firmware "no medir batería durante el pulso de ignición" se mantiene | V confirma la compra del NTC; el fix es 1 símbolo + 1 desconexión en la GUI; el PCB referencia el header 1x02 nuevo cerca de InBatt. BOM +1 |
