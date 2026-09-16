@@ -8,7 +8,7 @@ A solid-state, remote ignition system designed for experimental rocketry. Built 
 ## 🧠 System Architecture
 * **Microcontroller:** Raspberry Pi Pico (RP2040)
 * **Firmware:** Rust 🦀 with Embassy — **planned, not implemented yet** (see [Hardware status](#-hardware-status))
-* **Telemetry & Comms:** LoRa / NRF24L01+ modules
+* **Telemetry & Comms:** LoRa (SX1278 RA-02, single transceiver — TX/RX role is firmware-side, half-duplex)
 * **Power Switching:** Logic-Level N-Channel MOSFET (AOD4184A)
 
 ## 📂 Repository Structure
@@ -27,15 +27,15 @@ A solid-state, remote ignition system designed for experimental rocketry. Built 
 3. Build and run: `cargo run --release`
 
 ### Hardware
-Open the project in KiCad 8.x or newer located in the `/hardware/` directory.
+Open the project in KiCad 10.x (KiCad 9.x also fine) located in the `/hardware/` directory.
 
 ## 📋 Hardware status
 
 Schematics and PCB live in `/hardware/Kicad/ignition-system/`. Current status
-(wave 1, in progress — see [`docs/design-notes.md`](docs/design-notes.md) for
+(wave 3, in progress — see [`docs/design-notes.md`](docs/design-notes.md) for
 the full design reference):
 
-* **Schematic:** RP2040 (Pico) + TP4056 Li-ion charger + AOD4184A N-MOSFET ignition switch + 2× LoRa/nRF24 headers + I2C display + status LEDs. Fixes in progress (TP4056 CE→VBUS, TEMP→GND, stray DIO labels).
-* **PCB:** placed, **not routed** (0 tracks/vias). DRC: 34 violations (6 drill 0.2mm < 0.3mm min + 28 silkscreen) and 59 unconnected pads — pending wave 3.
+* **Schematic:** RP2040 (Pico) + TP4056 Li-ion charger (TEMP via external NTC 10k B3950, TH1) + AOD4184A N-MOSFET ignition switch + SX1278 RA-02 socket (2× 1×08 headers: SPI + control rows) + I2C display + status LEDs + master power switch SW3 (battery → SW3 → VSYS; the pack charges with the board off). ERC: 0 errors / 0 warnings.
+* **PCB:** placement in progress, **not routed** (agentes solo verifican con kicad-cli). DRC findings pending wave-3 fixes; see design-notes §5.
 * **Firmware:** `src/` is empty; no Rust/Embassy code exists yet.
 * **Next:** wave 2 SPICE validation of the MOSFET gate margin (3.3V vs Vto 2.61V). 
