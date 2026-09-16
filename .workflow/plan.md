@@ -194,6 +194,16 @@ reales del ignitor incorporados (condición del audit de wave 2).
     celda). Ventana térmica resultante ≈ 0–45°C de carga. ERC 0/0 + commit.
     En el PCB: el nuevo footprint cerca de InBatt (el sensor va al pack,
     no al aire). BOM +1 ítem.
+0c. **H9 (humano, GUI) — switch maestro SW3 [ya hecho por V, 2026-09-15,
+    ERC 0/0]:** SPDT en SERIE en la línea +: InBatt pin1 → SW3 pin2 (común)
+    → pin1 → VSYS. El tercer pin QUEDA FLOTANTE (nunca a tierra: un
+    interruptor de potencia a tierra = cortocircuito del pack cuando se
+    acciona; la filosofía de "throw a GND" de SW2 aplica SOLO a la línea
+    del ignitor, que no tiene fuente detrás). Recomendado: bandera No-Connect
+    (X) sobre SW3 pin3. Consecuencia aceptada: para CARGAR hay que encender
+    el switch (TP4056 necesita ver la celda); con SW3 abierto, la placa
+    consume 0 (ni el divisor ADC drena). BOM +1. PCB: cerca del borde,
+    accesible en el bay.
 
 1. **T6 (executor-4):** board setup `min_through_hole_diameter` 0.3 → 0.2mm
    en `.kicad_pro` (JSON, clave `"design_settings.rules.min_through_hole_diameter"`,
@@ -219,7 +229,7 @@ reales del ignitor incorporados (condición del audit de wave 2).
 | File/glob | Owner |
 |-----------|-------|
 | `ignition-system.kicad_pcb` | HUMANO (GUI) — placement y ruteo |
-| `ignition-system.kicad_sch` | HUMANO SOLO para H7b (3 GND socket RA-02) y H8 (NTC al TEMP — ver decision log 2026-09-15b) |
+| `ignition-system.kicad_sch` | HUMANO SOLO para H7b (3 GND socket RA-02), H8 (NTC al TEMP) y H9 (switch maestro SW3 — ver decision log 2026-09-15c) |
 | `.kicad_pro` (SOLO la clave min_through_hole_diameter) | executor-4 (T6) |
 | `docs/design-notes.md` (§ ignitor/estado PCB → T7 [hecho]; §2 pin map, §4 BOM, §6 nota radio → T9) | executor-4 |
 | `docs/ignition-system.pdf` | executor-4 (T9: regenerado con kicad-cli tras H7b) |
@@ -286,3 +296,4 @@ Gerbers + BOM + PDF final — 100% headless con kicad-cli (agente) +
 | 2026-09-01 | **T6 (wave 3) integrada a main** — merge `wave3-executor-4` (82d910d, merge 75974c5), sin conflictos. DRC en árbol integrado: `drill_out_of_range` = 0 (las 6 del TP4056 desaparecieron); quedan 54 violaciones / 61 unconnected, todas categorías pre-ruteo (H6 pendiente). Nota: el grep literal del brief (`: "0.2"`) no matchea porque KiCad serializa el número sin comillas; semántica verificada en el diff (0.3→0.2, 1 línea) | Board setup corregido ANTES de que el humano abra la GUI, según orden estricto de wave 3 |
 | 2026-09-15 | **Protección de batería v1: celda LiPo CON protección integrada (PCM, "protected") + corte por firmware.** El TP4056 es solo cargador (termina a 4.2V; NO protege de sobre-descarga ni de corto en descarga; TEMP→GND = sin NTC). Nivel de celda en display: YA cableado (divisor R5/R6 10k/10k → GPIO26/ADC; 4.2V→2.1V dentro del rango ADC del Pico); el % y las advertencias son de FIRMWARE (ola de software). Regla de firmware: no medir durante el pulso de ignición (el sag de 2.7A corrompe la lectura). NTC al pin TEMP: diferido — solo si V consigue celda con NTC de 3 hilos, se añade el divisor en un fix posterior | La vía con cero cambios de diseño es comprar celda protegida; ponytail: no metemos NTC al PCB que se está por rutear sin la celda concreta en mano |
 | 2026-09-15b | **REVISA la fila anterior (2026-09-15, protección de batería): V comprará NTC 10k B3950 pegado a la celda; la celda lleva PCM integrado.** La protección eléctrica vive en el PCM de la celda; el TEMP del TP4056 recupera su función térmica con el NTC externo. H8: pin 1 (TEMP) del ModuloDeCarga1 deja de ir directo a GND → va por `Device:Thermistor_NTC` (Value `NTC 10k B3950`, footprint `PinHeader_1x02_P2.54mm_Vertical`) a GND; ventana térmica ≈ 0–45°C. La regla de firmware "no medir batería durante el pulso de ignición" se mantiene | V confirma la compra del NTC; el fix es 1 símbolo + 1 desconexión en la GUI; el PCB referencia el header 1x02 nuevo cerca de InBatt. BOM +1 |
+| 2026-09-15c | **H9: switch maestro SW3 en serie con la batería (hecho por V, ERC 0/0).** InBatt+ → SW3 común → VSYS; tercer pin FLOTANTE (nunca GND: un interruptor de potencia a tierra cortocircuita el pack al accionarlo — el 'throw a GND' de SW2 solo aplica a la línea de ignitor, que no tiene fuente detrás). Consecuencia aceptada: cargar requiere switch encendido (TP4056 necesita ver la celda). Con SW3 abierto: consumo 0 (ni el divisor ADC drena). BOM +1 actuator (SPDT) | Placa de cohetería: switch maestro de borde es práctica estándar de aviónica; evita desconectar el JST constantemente (lo que V pidió) |
