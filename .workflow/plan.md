@@ -194,16 +194,17 @@ reales del ignitor incorporados (condición del audit de wave 2).
     celda). Ventana térmica resultante ≈ 0–45°C de carga. ERC 0/0 + commit.
     En el PCB: el nuevo footprint cerca de InBatt (el sensor va al pack,
     no al aire). BOM +1 ítem.
-0c. **H9 (humano, GUI) — switch maestro SW3 [ya hecho por V, 2026-09-15,
-    ERC 0/0]:** SPDT en SERIE en la línea +: InBatt pin1 → SW3 pin2 (común)
-    → pin1 → VSYS. El tercer pin QUEDA FLOTANTE (nunca a tierra: un
-    interruptor de potencia a tierra = cortocircuito del pack cuando se
-    acciona; la filosofía de "throw a GND" de SW2 aplica SOLO a la línea
-    del ignitor, que no tiene fuente detrás). Recomendado: bandera No-Connect
-    (X) sobre SW3 pin3. Consecuencia aceptada: para CARGAR hay que encender
-    el switch (TP4056 necesita ver la celda); con SW3 abierto, la placa
-    consume 0 (ni el divisor ADC drena). BOM +1. PCB: cerca del borde,
-    accesible en el bay.
+0c. **H9 [rev 2026-09-15] (humano, GUI) — switch maestro del lado del
+    CONSUMO, no de la batería** (comportamiento tipo teléfono: cargar con la
+    placa apagada). Rewiring: el nudo InBatt pin1 ↔ TP4056 pin5 (BAT) queda
+    SIEMPRE conectado (label `BATP`); desde ese nudo → SW3 pin2 → pin1 →
+    VSYS. Así: switch abierto = Pico/divisor/LEDS/ignitor muertos, y USB
+    enchufado = celda cargando igual. LEDs CHRG/STDBY siguen indicando
+    (su alimentación es VBUS, aguas abajo del USB del Pico, no del switch).
+    Drain con switch abierto: µA clínicamente cero (leak del TP4056 + PCM
+    de la celda — ambos << autodescarga). El ítem de "para CARGAR hay
+    que encender el switch" queda revocado. постановка PCB igual: cerca
+    del borde. BOM +1 (ya hecho). ERC 0/0 + commit.
 
 1. **T6 (executor-4):** board setup `min_through_hole_diameter` 0.3 → 0.2mm
    en `.kicad_pro` (JSON, clave `"design_settings.rules.min_through_hole_diameter"`,
