@@ -40,15 +40,23 @@ lazo de ignición lo más corto posible.
 │ [TP4056] C1  R4  C2   [PICO — centro,      │   ← bloque CARGA a la izq.
 │  CHRG STDBY LEDs]      horizontal]         │
 ├────────────────────────────────────────────┤
-│ Display1        LORA1 (ÚNICO) ──           │   ← UN header de radio,
-│ SW1 botón  LEDs estado (borde inferior)    │      antena hacia el borde
+│ Display1      [MÓDULO RA-02 — LORA1+LORA2  │   ← socket de DOS headers
+│                filas paralela/espejo]      │      separados = módulo real
+│ SW1 botón  LEDs estado (borde inferior)    │
 └────────────────────────────────────────────┘
 ```
 
-> **OJO (2026-09-15): ya NO hay LORA2.** La radio se consolidó en una sole
-> LORA1 (NSS/MOSI/MISO/SCK + RST/DIO0/3V3/GND). El rol TX/RX es firmware:
-> un RA-02 por placa. Si ya habías colocado LORA2 en el PCB, bórralo
-> (sobre él: clic derecho → Delete) y recoloca LORA1.
+> **CORRECTO (2026-09-15, H7 revocado): LORA1 y LORA2 son los DOS BORDES
+> del MISMO RA-02** (17×16mm, 8 agujeros por borde, pitch 2.54). El módulo
+> se sienta sobre los dos headers como un DIP. El rol TX/RX es firmware —
+> el cableado es idéntico en ambas placas. H7b: añadir solo los 3 GND
+> físicos que faltan (LORA1 pin1, LORA1 pin8, LORA2 pin1).
+> **PCB:** los headers deben ir JUNTOS: separación centro-a-centro entre
+> LORA1 y LORA2 = la distancia real medida en TU módulo físico (~13-16mm,
+> medir con regla), filas paralelas y opuestas, así el módulo cae sobre
+> los dos. Soldadura: fila A → GND NSS MOSI MISO SCK DIO5 DIO4 GND;
+> fila B → GND GND 3V3 RST DIO0 DIO1 DIO2 DIO3 (DIO1-DIO5 quedan sueltos:
+> el firmware usa solo DIO0). Antena IPEX SIEMPRE puesta al transmitir.
 
 Reglas de placement que NO se negocian:
 1. **Lazo de ignición compacto:** InBatt/SW2 → J1 → MOSFET drain, en ese

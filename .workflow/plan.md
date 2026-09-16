@@ -176,16 +176,20 @@ reales del ignitor incorporados (condición del audit de wave 2).
 
 ### Orden estricto
 
-0. **H7 (humano, GUI) + T9 (executor-4) — ANTES de seguir el ruteo —
-   2026-09-15:** consolidar la radio en UN header. Diagnóstico: SPI está en
-   LORA1 y RST/DIO0/3V3/GND en LORA2 (un RA-02 físico no cabe en ese split;
-   LORA2 nunca tuvo SPI). Fix: borrar LORA2-Sx1278, conectar en LORA1 los
-   pines libres (1, 6, 7, 8) a las labels/nets existentes RST, DIO0, 3V3 y
-   GND. GPIO sin cambios (RST=GPIO20, DIO0=GPIO21, SPI=GPIO16-19). El rol
-   TX/RX es puro firmware: un transceptor half-duplex da para ambas placas
-   del par. H7: humano en GUI, ERC 0/0, commit. T9: executor-4 verifica ERC,
-   regenera `docs/ignition-system.pdf` y actualiza design-notes (§2 pin map
-   sin LORA2, §4 BOM, §6 nota radio). BOM pierde 1 conector 1x08.
+0. **H7b (humano, GUI) — ANULA el H7 anterior (2026-09-15, diagnóstico
+   corregido):** el esquemático ORIGINAL ya era correcto. LORA1 y LORA2
+   (Conn_01x08) son los DOS BORDES de un mismo módulo RA-02 (17×16mm, 8
+   agujeros por borde): fila A = GND,NSS,MOSI,MISO,SCK,DIO5,DIO4,GND;
+   fila B = GND,GND,3V3,RST,DIO0,DIO1..DIO3. El wiring existente casa 1:1
+   con las filas físicas — era el socket del módulo, no dos radios. Fix
+   real: completar el socket con los GND físicos de los bordes: LORA1
+   pin1→GND, LORA1 pin8→GND, LORA2 pin1→GND (DIO1-5 sueltos: el firmware
+   solo usa DIO0). ERC 0/0. En el PCB: headers JUNTOS como socket —
+   separación centro-a-centro = la medida real del módulo físico (~13-16mm,
+   el humano la mide), filas paralelas y opuestas. El rol TX/RX sigue
+   siendo puro firmware (transceptor half-duplex): esa conclusión NO cambia.
+   T9 queda como verificación post-H7b (ERC + PDF + design-notes §2/§4/§6
+   sin el texto de "header único"; LORA2 continúa).
 
 1. **T6 (executor-4):** board setup `min_through_hole_diameter` 0.3 → 0.2mm
    en `.kicad_pro` (JSON, clave `"design_settings.rules.min_through_hole_diameter"`,
@@ -213,8 +217,8 @@ reales del ignitor incorporados (condición del audit de wave 2).
 | `.kicad_pro` (SOLO la clave min_through_hole_diameter) | executor-4 (T6) |
 | `ignition-system.kicad_pcb` | HUMANO (GUI) — placement y ruteo |
 | `docs/design-notes.md` (§ ignitor/estado PCB → T7 [hecho]; §2 pin map, §4 BOM, §6 nota radio → T9) | executor-4 |
-| `docs/ignition-system.pdf` | executor-4 (T9: regenerado con kicad-cli tras H7) |
-| `ignition-system.kicad_sch` | HUMANO SOLO para H7 (borrar LORA2 + reconectar RST/DIO0/3V3/GND a LORA1); si no, congelado |
+| `docs/ignition-system.pdf` | executor-4 (T9: regenerado con kicad-cli tras H7b) |
+| `ignition-system.kicad_sch` | HUMANO SOLO para H7b (añadir 3 GND del socket RA-02: LORA1 pin1, LORA1 pin8, LORA2 pin1); si no, congelado |
 | `sim/wave2/*`, `.workflow/*` | prohibidos para executor-4 |
 
 > Nota (práctica observada en `a9de791`): si la GUI de KiCad reordena el
@@ -272,4 +276,5 @@ Gerbers + BOM + PDF final — 100% headless con kicad-cli (agente) +
 | 2026-09-02 | **H5: ignitor real medido por el humano.** Lote n=10, 2 multímetros: R min 0.8 / typ 0.93 / max 1.1Ω (spread ≤0.3, lote consistente). Fase B: 4/4 disparados con pila 3V vía amperímetro; rango 200mA → OVERLOAD (I > 200mA real); la lectura "0.01A" del rango 10A se descarta como artefacto de display (el burst dura ms, el DMM muestrea ~3/s; a 10mA con 0.93Ω habría solo 0.1mW — físicamente imposible disparar). **Chequeo de margen (T7):** I_worst = 3.3/(1.1 + 0.2 + 0.034) ≈ **2.47A** ≥ 1.1A (margen 2.25×); nominal 3.6V → 2.70A; P ignitor ≈ 6.7W por pulso; P MOSFET ≈ 0.21W por pulso (trivial para DPAK). R_wire no medido: estimado 0.2Ω conservador | **Cierra la condición del REPORT.md wave 2: veredicto (a) CONFIRMADO con datos reales** — sin driver, sin cambiar MOSFET. Nota BOM: usar LiPo 1S ≥500mAh (pulso 2.7A trivial para cualquier celda ≥1C). Datos fuente para T7 de executor-4 |
 | 2026-09-04 | **Wave 3: T7 integrada + H-2 resuelto** — audit H-2/H-3 ejecutados: restore del `.kicad_pro` (reversión 0.2→0.3 descartada, copia en `/tmp/opencode/kicad_pro.dirty.bak`) y merge `wave3-executor-4` (`faacd71`, T7) con `--no-ff` (`1877ec3`), sin conflictos. Verificación del árbol integrado: ERC 0, DRC 54/61 pre-ruteo con 0 `drill_out_of_range`, T7 grep PASS en main, SPICE exit 0 reproducible, design-notes §6 con I_worst 2.47A. Restante para cerrar la ola: H6 (humano, GUI) → T8 (DRC 0/0) → re-audit | "integra todo" del humano; commit merge 1877ec3 |
 | 2026-09-04 | **Auditoría completa (waves 1-3): APPROVED WITH EXCEPTIONS** (`.workflow/audits/wave3.md`). Gates wave 1-2 re-verificados verdes: ERC 0, SPICE reproducible byte-idéntico, T6 se sostiene en HEAD (0 drill_out_of_range, 54/61 pre-ruteo), T7 aritmética reproducida (I_worst 2.47A, margen 2.25×). Hallazgos: H-2 CRÍTICO-acción — working tree tiene reversión sin commitear de T6 (0.2→0.3, las 6 drill_out_of_range vuelven; DRC 60 vs 54 probado); H-3 — T7 (`faacd71`) pusheada pero sin mergear a main; H-1 menor heredado (brief grep comillado). Antes de H6: restore del `.kicad_pro` + merge T7 | Árbol integrado @ 54443c5, auditor sesión fresca |
+| 2026-09-15 | **CORRECCIÓN: se revoca la consolidación de radio (H7 → H7b).** La anatomía física del RA-02 (2 filas de 8 agujeros, un borde por cara del módulo de 17×16mm) demuestra que LORA1+LORA2 del esquemático original ya eran el SOCKET del módulo — no dos radios ni variantes TX/RX. El wiring existente casa 1:1 con las filas físicas; solo faltan 3 GND de borde. El planner erró al leer el socket como "módulo partido" — la foto física aportada por el humano fue la evidencia faltante. Lo que sobrevive de la decisión anterior: el rol TX/RX es puro firmware (transceptor half-duplex, un módulo por placa) | Falibilidad registrada: leer netlist sin contexto físico induce a error en hardware. Nada del H7 original llegó a archivo (ni .sch ni .pcb tocaron LORA2); el fix real es mínimo (3 wires) |
 | 2026-09-01 | **T6 (wave 3) integrada a main** — merge `wave3-executor-4` (82d910d, merge 75974c5), sin conflictos. DRC en árbol integrado: `drill_out_of_range` = 0 (las 6 del TP4056 desaparecieron); quedan 54 violaciones / 61 unconnected, todas categorías pre-ruteo (H6 pendiente). Nota: el grep literal del brief (`: "0.2"`) no matchea porque KiCad serializa el número sin comillas; semántica verificada en el diff (0.3→0.2, 1 línea) | Board setup corregido ANTES de que el humano abra la GUI, según orden estricto de wave 3 |
