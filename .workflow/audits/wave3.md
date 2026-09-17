@@ -1,4 +1,84 @@
-# Audit — Wave 3 (auditoría completa, estado 2026-09-04)
+# Audit — Wave 3 (cierre, auditoría 2026-09-16)
+
+**Fecha:** 2026-09-16 · **Auditor:** sesión fresca, `main` @ `709d7ee`
+**Alcance:** cierre de la wave 3 post-H7b/H8/H9/H6/T8. Supersede la
+supersede de la auditoría de hito (2026-09-04, conservada más abajo).
+
+## Veredicto: APPROVED WITH EXCEPTIONS (ninguna bloquea la ola 4)
+
+## 1. Integridad de integración
+
+- [x] `git status` limpio, sin stashes; `main` == `origin/main`.
+- [x] `wave3-executor-4` integrada: `git merge-base --is-ancestor` → MERGED
+      (merge `2ae2736`, padres `94f5187`+`00a146f`, sin conflictos).
+- [x] Ownership (revisión `git log --stat` de los 12 commits de la ola):
+      `.kicad_sch`/`.kicad_pcb` (humano H7b/H8/H9/H6) ✓, `design-notes`/PDF
+      (T9) ✓, `.kicad_pro` (709d7ee = restauración T6 0.3→0.2 + GUI save) ✓.
+      Excepción 1 (menor): `6004da0` tocó `README.md` + 120 líneas de
+      design-notes hechos por el humano directamente en main — territorio
+      del executor-4 en el map; contenido correcto y cronológicamente
+      antes del PDF. No desvía el gate, registra la Prompt: el humano es
+      la autoridad, pero los commits de docs debieron ir al executor.
+- [x] Excepción 2 (menor): `94f5187` mezcló cambios GUI del `.kicad_pro`
+      (17 l: defaults vacíos de diff_pair/vias, reorder designators — nada
+      de reglas) dentro de un `feat:` en vez del `chore(kicad):` separado
+      que pide la práctica del audit wave 2. Opcionalmente amender.
+
+## 2. Build & tests (evidencia, árbol integrado 709d7ee)
+
+- [x] ERC: `kicad-cli sch erc` → `Found 0 violations`, exit 0.
+- [x] DRC: `kicad-cli pcb drc` → `Found 53 DRC violations`, **0 errores**
+      (35 `silk_overlap`, 10 `silk_over_copper`, 8 `lib_footprint_mismatch`
+      — todas "Local override; warning"), **`Found 0 unconnected items` /
+      `Found 0 unconnected pads`**. Gate "0 errores / 0 unconnected":
+      CUMPLE. `drill_out_of_range` = 0 (T6 se sostiene).
+- [x] T6 verificada en HEAD: `709d7ee` re-restaura `min_through_hole_diameter`
+      0.3→0.2 (reversión de un save anterior de GUI), 1 línea net; diff
+      revisado completo, sin claves de reglas alteradas (track_widths +
+      Power class 1.0/0.25 = Hito 0 del brief de ruteo).
+- [x] Contorno: ≤100×100mm (medido por script sobre el layer Edge.Cuts:
+      87.2×42.5mm de bbox) — Hito 0 del brief ✓.
+- [x] T7/T9 en design-notes (grep -n): R real 0.8/0.93/1.1Ω, chequeo de
+      margen `I_worst = 3.3/(1.1+0.2+0.034) ≈ 2.47A ≥ 1.1A` (margen 2.25×),
+      radio "SOCKET del RA-02, 1 radio por placa, rol por firmware", TH1
+      NTC B3950, SW3 BATP→VSYS. Cierre de la condición del REPORT wave 2
+      re-verificado.
+- [x] PDF más nuevo que el último cambio del `.kicad_sch`:
+      `94f5187` 13:29 < `00a146f` 14:09 ✓.
+- [x] Sin cambios en `sim/wave2/*` ni workflow prohibidos para executor-4
+      (`sim/` ausente en todos los --stat) — el gate SPICE de wave 2 no se
+      re-corre: nada lo tocó.
+
+## 3. Disciplina ponytail
+
+- [x] H7b: revocación documentada y fix mínimo (3 GND); nada del H7
+      original llegó a archivo — verificado en `git log --stat` de la ola.
+- [x] Sin deps nuevas; sin abstracciones nuevas (hardware).
+- [ ] Menor (hito 4 del brief): 45 warnings silk siguen — el brief dice
+      "reduce los que puedas"; 35 `silk_overlap` en una tabla de silks
+      aceptable para fab, no es gate. Opcional remarcar en wave 4 si la fab
+      corta silks.
+
+## 4. Seguridad
+
+- [x] `git grep -ilE 'api_key|secret|token|password|PRIVATE KEY'` → solo
+      `audit-checklist.md` (su propia regex) y `LICENSE-HARDWARE` (texto
+      legal). Sin secretos.
+- [x] Sin trust boundaries nuevas (ningún input nuevo procesado; hardware
+      puro).
+- N/A Release gate `skills/security-audit`: ola 4 (plan).
+
+## 5. Handoff
+
+- [x] Este archivo actualiza y supersede el audit del 2026-09-04.
+- [ ] plan.md: fila wave 3 del status actualizada por esta auditoría.
+- [ ] Ola 4 (Gerbers + BOM + PDF final + security-audit): lista para
+      re-planificar; los 53 warnings silk se pueden arrastrar como deuda
+      o limpiar antes de exportar (decisión del planner).
+
+---
+
+# (HISTÓRICO) Audit — Wave 3 (auditoría completa, estado 2026-09-04)
 
 **Fecha:** 2026-09-04 · **Auditor:** sesión fresca, árbol integrado en `main` @ `54443c5`
 **Alcance:** "audita todo" — re-verificación de los gates de waves 1-2 y estado

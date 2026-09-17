@@ -39,7 +39,7 @@ ignitor validado por simulación SPICE, y Gerbers + BOM generados.
 |------|-------|--------|
 | 1 | Esquemático limpio: ERC 0, fixes TP4056 (CE→VBUS, TEMP), labels DIO, artefactos docs | [x] integrated (ERC 0 verificado 2026-08-18) |
 | 2 | Validación de potencia por SPICE (gate 3.3V vs Vto 2.61V, disparo del ignitor) | [x] audited 2026-09-01 (APPROVED WITH EXCEPTIONS, ver `.workflow/audits/wave2.md`) |
-| 3 | PCB: reglas, planos de cobre, ruteo (HUMANO en GUI), DRC 0 | [~] in-flight (T6+T7 integradas 2026-09-04, merge `1877ec3`; falta H6 humano → T8 — audit `.workflow/audits/wave3.md`) |
+| 3 | PCB: reglas, planos de cobre, ruteo (HUMANO en GUI), DRC 0 | [x] audited 2026-09-16 (APPROVED WITH EXCEPTIONS menores, ver `.workflow/audits/wave3.md` — DRC 0 errores/0 unconnected, ERC 0) |
 | 4 | Release: Gerbers, BOM, PDF final, security-audit | [ ] planned |
 
 > Status legend: planned → in-flight → integrated → audited → done.
