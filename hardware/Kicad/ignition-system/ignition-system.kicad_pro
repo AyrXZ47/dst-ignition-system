@@ -158,7 +158,7 @@
         "min_silk_clearance": 0.0,
         "min_text_height": 0.8,
         "min_text_thickness": 0.08,
-        "min_through_hole_diameter": 0.3,
+        "min_through_hole_diameter": 0.2,
         "min_track_width": 0.0,
         "min_via_annular_width": 0.1,
         "min_via_diameter": 0.5,
@@ -210,7 +210,12 @@
         }
       ],
       "track_widths": [
-        0.0
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        1.0,
+        2.0
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -702,7 +707,7 @@
         "uuid": "e17dc731-fbd5-49fb-b534-5ba28a19fa2e"
       }
     ],
-    "used_designators": "LORA\\-Sx1278(B)1,Azul(Sistema/Link)1,Rojo(Armado/Peligro)1,Display1,#PWR4-5,#PWR7,#PWR11-12,#PWR14-16,IGNITOR1,STDBY1,LORA2,YLED1,CHRG1,#FLG1,TH1,RaspberryPi_Pico1,LORA\\-Sx1278(A)1,ModuloDeCarga1,BLED1,InBatt1,RLED1,Amarillo(Modo/Rol)1,SW3",
+    "used_designators": "BLED1,InBatt1,ModuloDeCarga1,LORA\\-Sx1278(A)1,Rojo(Armado/Peligro)1,RLED1,Amarillo(Modo/Rol)1,IGNITOR1,#PWR4-5,#PWR7,#PWR11-12,#PWR14-16,Display1,Azul(Sistema/Link)1,LORA\\-Sx1278(B)1,RaspberryPi_Pico1,TH1,#FLG1,CHRG1,YLED1,LORA2,STDBY1,SW3",
     "variants": []
   },
   "sheets": [
